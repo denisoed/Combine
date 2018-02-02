@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    title Arial Gym
+
+    meta(name="description" content="")  
+    meta(name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1")
+    meta(http-equiv="X-UA-Compatible", content="ie=edge")
+    // Template Basic Images Start
+    meta(property="og:image" content="path/to/image.jpg")
+    link(rel="shortcut icon" href="img/favicon/favicon.ico" type="image/x-icon")          
+    
+    // Chrome, Firefox OS and Opera  
+    meta(name="theme-color" content="#000")
+    // Windows Phone  
+    meta(name="msapplication-navbutton-color" content="#000")
+    // iOS Safari  
+    meta(name="apple-mobile-web-app-status-bar-style" content="#000")
+    // Custom Browsers Color End
+
+  body
+    ////////////////////Code//////////////////////////
+    a(href="about.html") About
+    //////////////////// End Code /////////////////////
+
+    link(rel="stylesheet" href="css/packages.min.css")
+    //---------Change the file with the styles for the corresponding-------\\  
+    link(rel="stylesheet" href="css/styles/index.css")
+
+    // Optimized loading JS Start
+    script.
+      var scr = {"scripts":[
+      {"src" : "js/libs.min.js", "async" : false},
+      {"src" : "js/script.min.js", "async" : false}
+      ]};!function(t,n,r){"use strict";var c=function(t){if("[object Array]"!==Object.prototype.toString.call(t))return!1;for(var r=0;r<t.length;r++){var c=n.createElement("script"),e=t[r];c.src=e.src,c.async=e.async,n.body.appendChild(c)}return!0};t.addEventListener?t.addEventListener("load",function(){c(r.scripts);},!1):t.attachEvent?t.attachEvent("onload",function(){c(r.scripts)}):t.onload=function(){c(r.scripts)}}(window,document,scr);
+    // Optimized loading JS End  
