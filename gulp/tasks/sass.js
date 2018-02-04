@@ -1,10 +1,10 @@
 var gulp           = require('gulp'),
-	sass           = require('gulp-sass'),
+		sass           = require('gulp-sass'),
     cleanCSS       = require('gulp-clean-css'),
-	rename         = require('gulp-rename'),
+		rename         = require('gulp-rename'),
     browserSync    = require('browser-sync'),
-	notify         = require("gulp-notify"),
-	cssbeautify    = require('gulp-cssbeautify'),
+		notify         = require('gulp-notify'),
+		cssbeautify    = require('gulp-cssbeautify'),
     autoprefixer   = require('gulp-autoprefixer');
 
 gulp.task('sass', ["styles"], function() {

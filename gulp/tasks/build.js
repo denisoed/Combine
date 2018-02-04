@@ -1,5 +1,8 @@
 var gulp           = require('gulp'),
     del            = require('del'),
+    imagemin       = require('gulp-imagemin'),
+    cache          = require('gulp-cache'),
+		pngquant       = require('imagemin-pngquant'),
     gulpRemoveHtml = require('gulp-remove-html');
 
 
@@ -35,6 +38,17 @@ gulp.task('buildhtml', function() {
   gulp.src(['app/templates/*.html'])
     .pipe(gulpRemoveHtml())
     .pipe(gulp.dest('dist/'));
+});
+
+gulp.task('imagemin', function() {
+	return gulp.src('app/img/**/*')
+		.pipe(cache(imagemin({
+			interlaced: true,
+			progressive: true,
+			svgoPlugins: [{removeViewBox: false}],
+			use: [pngquant()]
+		})))
+		.pipe(gulp.dest('dist/img'));
 });
 
 gulp.task('removedist', function() { return del.sync('dist'); });

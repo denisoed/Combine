@@ -1,5 +1,5 @@
 {
-  "name": "Start_template",
+  "name": "combine",
   "description": "The starting template for site layout, using the sass and pug preprocessor",
   "main": "index.js",
   "authors": [

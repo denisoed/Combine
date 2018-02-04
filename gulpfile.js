@@ -1,6 +1,6 @@
 var gulp           = require('gulp'),
-	browserSync    = require('browser-sync'),
-	requireDir     = require('require-dir');
+		browserSync    = require('browser-sync'),
+		requireDir     = require('require-dir');
 
 requireDir('gulp/tasks', { recurse: true });
 
