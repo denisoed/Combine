@@ -12,7 +12,7 @@ gulp.task('sass', ["styles"], function() {
 		.pipe(sass({outputStyle: 'expand'}).on("error", notify.onError()))
 		.pipe(rename({suffix: '.min', prefix : ''}))
 		.pipe(autoprefixer(['last 15 versions']))
-		.pipe(cleanCSS()) // Опционально, закомментировать при отладке
+		.pipe(cleanCSS()) // Comment out when debugging
 		.pipe(gulp.dest('app/css'))
 		.pipe(browserSync.reload({stream: true}));
 });
