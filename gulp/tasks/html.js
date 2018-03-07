@@ -2,7 +2,7 @@ var gulp   = require('gulp'),
     pug    = require('gulp-pug');
 
 gulp.task('pug', function() {
-  gulp.src('app/*.jade')
+  gulp.src('app/pug/*.pug')
     .pipe( pug({
         pretty: true,
       })
