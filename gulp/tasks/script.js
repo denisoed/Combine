@@ -1,7 +1,6 @@
 var gulp           = require('gulp'),
     concat         = require('gulp-concat'),
     uglify         = require('gulp-uglify'),
-    rename         = require('gulp-rename'),
     babel          = require('gulp-babel');
 
 gulp.task('script', function() {
@@ -15,15 +14,4 @@ gulp.task('script', function() {
 	.pipe(concat('script.min.js'))
 	.pipe(uglify())
 	.pipe(gulp.dest('app/js'));
-});
-
-gulp.task('libs', function() {
-	return gulp.src([
-        "app/libs/jquery/dist/jquery.min.js",
-        "app/libs/animejs/anime.min.js",
-        "app/libs/tilt.js-master/dest/tilt.jquery.min.js"
-    ])
-    .pipe(concat('libs.min.js'))
-    .pipe(uglify())
-    .pipe(gulp.dest('app/js'))
 });

@@ -3,10 +3,17 @@ var gulp           = require('gulp'),
     imagemin       = require('gulp-imagemin'),
     cache          = require('gulp-cache'),
 	pngquant       = require('imagemin-pngquant'),
+	gulpif         = require('gulp-if'),
+	useref         = require('gulp-useref'),
+	uglify         = require('gulp-uglify'),
     gulpRemoveHtml = require('gulp-remove-html');
 
+gulp.task('build', ['removedist', 'buildhtml', 'imagemin', 'sass'], function() {
 
-gulp.task('build', ['removedist', 'buildhtml', 'imagemin', 'sass', 'libs'], function() {
+	var buildLibs = gulp.src('app/*.html')
+		.pipe(useref())
+		.pipe(gulpif('*.js', uglify()))
+		.pipe(gulp.dest('app'));
 
 	var buildCssLibs = gulp.src([
 		'app/css/libs.min.css'
@@ -25,9 +32,9 @@ gulp.task('build', ['removedist', 'buildhtml', 'imagemin', 'sass', 'libs'], func
 	]).pipe(gulp.dest('dist'));
 
 	var buildFonts = gulp.src([
-		'app/fonts/**/*'
-	]).pipe(gulp.dest('dist/fonts'));
-
+		'app/webfonts/**/*'
+	]).pipe(gulp.dest('dist/webfonts'));
+	
 	var buildJs = gulp.src([
 		'app/js/*.js'
 	]).pipe(gulp.dest('dist/js'));
