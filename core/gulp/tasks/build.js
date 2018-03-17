@@ -9,7 +9,7 @@ const gulp           = require('gulp'),
 	gulpRemoveHtml = require('gulp-remove-html');
 
 let pathDev = '../../dev',
-	pathStage = '../../stage',
+	pathStage = '../../staging',
 	pathDist = '../../dist';
 
 gulp.task('build', ['removedist', 'buildhtml', 'imagemin', 'sass'], function() {

@@ -4,7 +4,7 @@ const gulp           = require('gulp'),
     babel          = require('gulp-babel');
 
 let pathDev = '../../dev',
-    pathStage = '../../stage';
+    pathStage = '../../staging';
 
 gulp.task('script', function() {
 	return gulp.src([

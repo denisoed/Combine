@@ -8,7 +8,7 @@ const gulp           = require('gulp'),
 		autoprefixer   = require('gulp-autoprefixer');
 		
 let pathDev = '../../dev',
-		pathStage = '../../stage';
+		pathStage = '../../staging';
 
 gulp.task('sass', ["styles"], function() {
 	return gulp.src(pathDev + '/sass/*.sass')
