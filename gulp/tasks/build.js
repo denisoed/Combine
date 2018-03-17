@@ -10,49 +10,49 @@ var gulp           = require('gulp'),
 
 gulp.task('build', ['removedist', 'buildhtml', 'imagemin', 'sass'], function() {
 
-	var buildLibs = gulp.src('app/*.html')
+	var buildLibs = gulp.src('stage/*.html')
 		.pipe(useref())
 		.pipe(gulpif('*.js', uglify()))
-		.pipe(gulp.dest('app'));
+		.pipe(gulp.dest('stage'));
 
 	var buildCssLibs = gulp.src([
-		'app/css/libs.min.css'
+		'stage/css/libs.min.css'
 	]).pipe(gulp.dest('dist/css'));
 
 	var buildCssBase = gulp.src([
-		'app/css/base.min.css'
+		'stage/css/base.min.css'
 	]).pipe(gulp.dest('dist/css'));
 
 	var buildCssStyles = gulp.src([
-		'app/css/styles/*.css'
+		'stage/css/styles/*.css'
 	]).pipe(gulp.dest('dist/css/styles'));
 
 	var buildFiles = gulp.src([
-		'app/.htaccess'
+		'stage/.htaccess'
 	]).pipe(gulp.dest('dist'));
 
 	var buildFonts = gulp.src([
-		'app/webfonts/**/*'
+		'stage/webfonts/**/*'
 	]).pipe(gulp.dest('dist/webfonts'));
 	
 	var buildJs = gulp.src([
-		'app/js/*.js'
+		'stage/js/*.js'
 	]).pipe(gulp.dest('dist/js'));
 
 	var buildShared = gulp.src([
-		'app/shared/**/*'
+		'stage/shared/**/*'
 	]).pipe(gulp.dest('dist/shared'));
 
 });
 
 gulp.task('buildhtml', function() {
-  gulp.src(['app/*.html'])
+  gulp.src(['stage/*.html'])
     .pipe(gulpRemoveHtml())
     .pipe(gulp.dest('dist/'));
 });
 
 gulp.task('imagemin', function() {
-	return gulp.src('app/img/**/*')
+	return gulp.src('stage/img/**/*')
 		.pipe(cache(imagemin({
 			interlaced: true,
 			progressive: true,

@@ -5,7 +5,7 @@ var gulp           = require('gulp'),
 
 gulp.task('script', function() {
 	return gulp.src([
-		'app/js/script.js',
+		'dev/js/script.js',
 		])
     .pipe(babel({
         presets: ['es2015', 'env'],
@@ -13,5 +13,5 @@ gulp.task('script', function() {
     }))
 	.pipe(concat('script.min.js'))
 	.pipe(uglify())
-	.pipe(gulp.dest('app/js'));
+	.pipe(gulp.dest('stage/js'));
 });

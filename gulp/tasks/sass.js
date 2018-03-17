@@ -8,22 +8,22 @@ var gulp           = require('gulp'),
     autoprefixer   = require('gulp-autoprefixer');
 
 gulp.task('sass', ["styles"], function() {
-	return gulp.src('app/sass/*.sass')
+	return gulp.src('dev/sass/*.sass')
 		.pipe(sass({outputStyle: 'expand'}).on("error", notify.onError()))
 		.pipe(rename({suffix: '.min', prefix : ''}))
 		.pipe(autoprefixer(['last 15 versions']))
 		.pipe(cleanCSS()) // Comment out when debugging
-		.pipe(gulp.dest('app/css'))
+		.pipe(gulp.dest('stage/css'))
 		.pipe(browserSync.reload({stream: true}));
 });
 
 
 gulp.task('styles', function() {
-	return gulp.src('app/sass/styles/*.sass')
+	return gulp.src('dev/sass/styles/*.sass')
 		.pipe(sass({outputStyle: 'expand'}).on("error", notify.onError()))
 		.pipe(autoprefixer(['last 15 versions']))
 		.pipe(cleanCSS())
 		.pipe(cssbeautify())
-		.pipe(gulp.dest('app/css/styles'))
+		.pipe(gulp.dest('stage/css/styles'))
 		.pipe(browserSync.reload({stream: true}))
 });
