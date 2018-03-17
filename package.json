@@ -4,7 +4,9 @@
   "description": "The starting template for site layout, using the sass and pug preprocessor. Only landing page site!",
   "main": "index.js",
   "scripts": {
-    "start": "npm i && bower i"
+    "start": "npm i && bower i",
+    "combine": "gulp --gulpfile core/gulp/gulpfile.js",
+    "build": "gulp build --gulpfile core/gulp/gulpfile.js"
   },
   "author": "Denisoed",
   "license": "ISC",
