@@ -4,9 +4,7 @@
   "description": "The starting template for site layout, using the sass and pug preprocessor. Only landing page site!",
   "main": "index.js",
   "scripts": {
-    "start": "npm i && bower i",
-    "combine": "gulp",
-    "prod": "gulp build"
+    "start": "npm i && bower i"
   },
   "author": "Denisoed",
   "license": "ISC",
@@ -34,13 +32,9 @@
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^3.1.0",
     "gulp-uglify": "^3.0.0",
-    "imagemin-pngquant": "^5.0.0",
     "gulp-useref": "^3.1.4",
-    "require-dir": "^0.3.1"
-  },
-  "dependencies": {
-    "font-awesome-5-css": "^1.0.0",
-    "jquery": "^3.3.1",
-    "normalize-css": "^2.3.1"
+    "imagemin-pngquant": "^5.0.0",
+    "require-dir": "^0.3.1",
+    "smart-grid": "^2.0.1"
   }
 }

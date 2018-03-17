@@ -39,13 +39,9 @@ gulp.task('build', ['removedist', 'buildhtml', 'imagemin', 'sass'], function() {
 		'app/js/*.js'
 	]).pipe(gulp.dest('dist/js'));
 
-	var buildAudio = gulp.src([
-		'app/audio/**/*'
-	]).pipe(gulp.dest('dist/audio'));
-
-	var buildVideo = gulp.src([
-		'app/video/**/*'
-	]).pipe(gulp.dest('dist/video'));
+	var buildShared = gulp.src([
+		'app/shared/**/*'
+	]).pipe(gulp.dest('dist/shared'));
 
 });
 
