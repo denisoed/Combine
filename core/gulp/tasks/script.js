@@ -1,6 +1,7 @@
 const gulp           = require('gulp'),
     concat         = require('gulp-concat'),
     uglify         = require('gulp-uglify'),
+    plumber        = require('gulp-plumber'),
     babel          = require('gulp-babel');
 
 let pathDev = '../../dev',
@@ -9,7 +10,8 @@ let pathDev = '../../dev',
 gulp.task('script', function() {
 	return gulp.src([
 		pathDev + '/js/script.js',
-		])
+        ])
+    .pipe(plumber())
     .pipe(babel({
         presets: ['es2015', 'env'],
         compact: true

@@ -6,53 +6,61 @@ const gulp           = require('gulp'),
 	gulpif         = require('gulp-if'),
 	useref         = require('gulp-useref'),
 	uglify         = require('gulp-uglify'),
+	fileinclude = require('gulp-file-include'),
 	gulpRemoveHtml = require('gulp-remove-html');
 
 let pathDev = '../../dev',
 	pathStage = '../../staging',
-	pathDist = '../../dist';
+	pathProd = '../../prod';
 
 gulp.task('build', ['removedist', 'buildhtml', 'imagemin', 'sass'], function() {
 
-	var buildLibs = gulp.src(pathStage + '/*.html')
+	let buildLibs = gulp.src(pathStage + '/*.html')
 		.pipe(useref())
 		.pipe(gulpif('*.js', uglify()))
 		.pipe(gulp.dest(pathStage + '/'));
 
-	var buildCssLibs = gulp.src([
+	let buildCssLibs = gulp.src([
 		pathStage + '/css/libs.min.css'
-	]).pipe(gulp.dest(pathDist + '/css'));
+	]).pipe(gulp.dest(pathProd + '/css'));
 
-	var buildCssBase = gulp.src([
+	let buildCssBase = gulp.src([
 		pathStage + '/css/base.min.css'
-	]).pipe(gulp.dest(pathDist + '/css'));
+	]).pipe(gulp.dest(pathProd + '/css'));
 
-	var buildCssStyles = gulp.src([
+	let buildCssStyles = gulp.src([
 		pathStage + '/css/styles/*.css'
-	]).pipe(gulp.dest(pathDist + '/css/styles'));
+	]).pipe(gulp.dest(pathProd + '/css/styles'));
 
-	var buildFiles = gulp.src([
+	let buildFiles = gulp.src([
 		pathStage + '/.htaccess'
-	]).pipe(gulp.dest(pathDist + ''));
+	]).pipe(gulp.dest(pathProd + ''));
 
-	var buildFonts = gulp.src([
-		pathStage + '/webfonts/**/*'
-	]).pipe(gulp.dest(pathDist + '/webfonts'));
+	let buildFonts = gulp.src([
+		pathStage + '/fonts/**/*'
+	]).pipe(gulp.dest(pathProd + '/fonts'));
 	
-	var buildJs = gulp.src([
+	let buildJs = gulp.src([
 		pathStage + '/js/*.js'
-	]).pipe(gulp.dest(pathDist + '/js'));
+	]).pipe(gulp.dest(pathProd + '/js'));
 
-	var buildShared = gulp.src([
+	let buildShared = gulp.src([
 		pathStage + '/shared/**/*'
-	]).pipe(gulp.dest(pathDist + '/shared'));
+	]).pipe(gulp.dest(pathProd + '/shared'));
+
+	let buildDefault = gulp.src([
+		pathStage + '/shared/default/**/*'
+	]).pipe(gulp.dest(pathProd + '/shared/default'));
 
 });
 
 gulp.task('buildhtml', function() {
   gulp.src([pathStage + '/*.html'])
+	.pipe(fileinclude({
+		prefix: '@@'
+	}))
     .pipe(gulpRemoveHtml())
-    .pipe(gulp.dest(pathDist + '/'));
+    .pipe(gulp.dest(pathProd + '/'));
 });
 
 gulp.task('imagemin', function() {
@@ -63,7 +71,7 @@ gulp.task('imagemin', function() {
 			svgoPlugins: [{removeViewBox: false}],
 			use: [pngquant()]
 		})))
-		.pipe(gulp.dest(pathDist + '/img'));
+		.pipe(gulp.dest(pathProd + '/img'));
 });
 
-gulp.task('removedist', function() { return del.sync(pathDist); });
+gulp.task('removedist', function() { return del.sync(pathProd); });

@@ -11,7 +11,7 @@
     "**/.*",
     "node_modules",
     "bower_components",
-    "staging/libs/",
+    "dev/libs/",
     "test",
     "tests"
   ],

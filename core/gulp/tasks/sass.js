@@ -4,7 +4,6 @@ const gulp           = require('gulp'),
 		rename         = require('gulp-rename'),
     browserSync    = require('browser-sync'),
 		notify         = require('gulp-notify'),
-		cssbeautify    = require('gulp-cssbeautify'),
 		autoprefixer   = require('gulp-autoprefixer');
 		
 let pathDev = '../../dev',
@@ -24,9 +23,19 @@ gulp.task('sass', ["styles"], function() {
 gulp.task('styles', function() {
 	return gulp.src(pathDev + '/sass/styles/*.sass')
 		.pipe(sass({outputStyle: 'expand'}).on("error", notify.onError()))
+		.pipe(rename({suffix: '.min', prefix : ''}))
 		.pipe(autoprefixer(['last 15 versions']))
 		.pipe(cleanCSS())
-		.pipe(cssbeautify())
 		.pipe(gulp.dest(pathStage + '/css/styles'))
+		.pipe(browserSync.reload({stream: true}))
+});
+
+gulp.task('critical', function() {
+	return gulp.src(pathDev + '/sass/styles/critical/*.sass')
+		.pipe(sass({outputStyle: 'expand'}).on("error", notify.onError()))
+		.pipe(rename({suffix: '.min', prefix : ''}))
+		.pipe(autoprefixer(['last 15 versions']))
+		.pipe(cleanCSS())
+		.pipe(gulp.dest(pathStage + '/css/styles/critical'))
 		.pipe(browserSync.reload({stream: true}))
 });

@@ -20,9 +20,9 @@ mixin head(data)
     meta(name="msapplication-navbutton-color" content="#000")
     //- iOS Safari  
     meta(name="apple-mobile-web-app-status-bar-style" content="#000")
-    //- Custom Browsers Color End
 
-    link(rel="stylesheet" href="css/libs.min.css")
-    link(rel="stylesheet" href="css/base.min.css")
-    //---------Change the file with the styles for the corresponding-------\\  
-    link(rel="stylesheet" href="css/styles/"+ data.style +".css")
+    style.
+        @@include('css/styles/critical/#{data.criticalCss}.min.css')
+    <!--<Deject>-->
+    link(rel="stylesheet", href="css/styles/critical/"+ data.criticalCss +".min.css")
+    <!--</Deject>-->
