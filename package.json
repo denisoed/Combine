@@ -6,7 +6,8 @@
   "scripts": {
     "start": "npm i && bower i",
     "combine": "gulp --gulpfile core/gulp/gulpfile.js",
-    "build": "gulp build --gulpfile core/gulp/gulpfile.js"
+    "build": "gulp build --gulpfile core/gulp/gulpfile.js",
+    "g-grid": "node ./options/grid.js"
   },
   "author": "Denisoed",
   "license": "ISC",
