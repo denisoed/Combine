@@ -6,31 +6,34 @@ const gulp           = require('gulp'),
 	gulpif         = require('gulp-if'),
 	useref         = require('gulp-useref'),
 	uglify         = require('gulp-uglify'),
-	fileinclude = require('gulp-file-include'),
+	fileinclude    = require('gulp-file-include'),
+	minifyCss      = require('gulp-clean-css'),
+	clearcache     = require('gulp-cache'),
 	gulpRemoveHtml = require('gulp-remove-html');
 
 let pathDev = '../../dev',
 	pathStage = '../../staging',
 	pathProd = '../../prod';
 
-gulp.task('build', ['removedist', 'buildhtml', 'imagemin', 'sass'], function() {
-
-	let buildLibs = gulp.src(pathStage + '/*.html')
+gulp.task('build', ['removedist', 'clearcache', 'imagemin', 'sass'], function() {
+	
+	let buildHtml = gulp.src(pathStage + '/*.html')
 		.pipe(useref())
+		.pipe(gulpif('*.css', minifyCss()))
 		.pipe(gulpif('*.js', uglify()))
-		.pipe(gulp.dest(pathStage + '/'));
-
-	let buildCssLibs = gulp.src([
-		pathStage + '/css/libs.min.css'
-	]).pipe(gulp.dest(pathProd + '/css'));
-
-	let buildCssBase = gulp.src([
-		pathStage + '/css/base.min.css'
-	]).pipe(gulp.dest(pathProd + '/css'));
-
+		.pipe(fileinclude({
+			prefix: '@@'
+		}))
+		.pipe(gulpRemoveHtml())
+		.pipe(gulp.dest(pathProd + '/'));
+		
 	let buildCssStyles = gulp.src([
-		pathStage + '/css/styles/*.css'
-	]).pipe(gulp.dest(pathProd + '/css/styles'));
+		pathStage + '/css/styles.min.css'
+	]).pipe(gulp.dest(pathProd + '/css'));
+
+	let buildJs = gulp.src([
+		pathStage + '/js/scripts.min.js'
+	]).pipe(gulp.dest(pathProd + '/js'));
 
 	let buildFiles = gulp.src([
 		pathStage + '/.htaccess'
@@ -39,10 +42,6 @@ gulp.task('build', ['removedist', 'buildhtml', 'imagemin', 'sass'], function() {
 	let buildFonts = gulp.src([
 		pathStage + '/fonts/**/*'
 	]).pipe(gulp.dest(pathProd + '/fonts'));
-	
-	let buildJs = gulp.src([
-		pathStage + '/js/*.js'
-	]).pipe(gulp.dest(pathProd + '/js'));
 
 	let buildShared = gulp.src([
 		pathStage + '/shared/**/*'
@@ -54,14 +53,6 @@ gulp.task('build', ['removedist', 'buildhtml', 'imagemin', 'sass'], function() {
 
 });
 
-gulp.task('buildhtml', function() {
-  gulp.src([pathStage + '/*.html'])
-	.pipe(fileinclude({
-		prefix: '@@'
-	}))
-    .pipe(gulpRemoveHtml())
-    .pipe(gulp.dest(pathProd + '/'));
-});
 
 gulp.task('imagemin', function() {
 	return gulp.src(pathStage + '/img/**/*')
@@ -74,4 +65,6 @@ gulp.task('imagemin', function() {
 		.pipe(gulp.dest(pathProd + '/img'));
 });
 
-gulp.task('removedist', function() { return del.sync(pathProd); });
+gulp.task('removedist', function() { return del.sync(pathProd, {force: true}) });
+
+gulp.task('clearcache', function() { return cache.clearAll(); });
