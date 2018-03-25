@@ -9,6 +9,12 @@ html(lang="en")
 				"description": "Start template",
         "criticalCss": "index_critical"
       })
+      meta(property='og:url', content='https://site.com')
+      meta(property='og:type', content='website')
+      meta(property='og:title', content='Title')
+      meta(property='og:description', content='Description')
+      meta(property='og:image', content='https://site.com/img/path/..')
+
   body
     //- ///////////////////////Code////////////////////////
     //- //////////////////// End Code /////////////////////
@@ -26,3 +32,11 @@ html(lang="en")
     script(src="libs/jquery/dist/jquery.min.js")
     script(src="js/script.min.js")
     //endbuild
+
+  // Global site tag (gtag.js) - Google Analytics
+  script(async, src='https://www.googletagmanager.com/gtag/js?id=UA-83208754-6')
+  script.
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-83208754-6');
