@@ -1,6 +1,6 @@
 module.exports.path = {
-    'dev': '../../dev',
-    'staging': '../../staging',
-    'prodaction': '../../prod'
+    'dev': '../../app/dev',
+    'staging': '../../app/staging',
+    'prodaction': '../../app/prod'
 }
 

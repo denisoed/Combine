@@ -36,4 +36,4 @@ var settings = {
     }
 };
  
-smartgrid('dev/sass', settings);
+smartgrid('app/dev/sass', settings);
