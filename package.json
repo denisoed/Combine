@@ -28,6 +28,7 @@
     "gulp-concat": "^2.6.0",
     "gulp-debug": "^3.0.0",
     "gulp-file-include": "^1.2.0",
+    "gulp-htmlmin": "^4.0.0",
     "gulp-if": "^2.0.2",
     "gulp-imagemin": "^3.0.3",
     "gulp-notify": "^3.0.0",

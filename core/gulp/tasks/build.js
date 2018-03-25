@@ -1,3 +1,5 @@
+const combine = require('../../../options/combine');
+
 const gulp           = require('gulp'),
 	del            = require('del'),
 	imagemin       = require('gulp-imagemin'),
@@ -9,11 +11,12 @@ const gulp           = require('gulp'),
 	fileinclude    = require('gulp-file-include'),
 	minifyCss      = require('gulp-clean-css'),
 	clearcache     = require('gulp-cache'),
+	htmlmin        = require('gulp-htmlmin'),
 	gulpRemoveHtml = require('gulp-remove-html');
 
-let pathDev = '../../dev',
-	pathStage = '../../staging',
-	pathProd = '../../prod';
+let pathDev = combine.path.dev,
+	pathStage = combine.path.staging,
+	pathProd = combine.path.prodaction;
 
 gulp.task('build', ['removedist', 'clearcache', 'imagemin', 'sass'], function() {
 	
@@ -25,6 +28,10 @@ gulp.task('build', ['removedist', 'clearcache', 'imagemin', 'sass'], function() 
 			prefix: '@@'
 		}))
 		.pipe(gulpRemoveHtml())
+		.pipe(gulp.dest(pathProd + '/'));
+
+	let buildHtmlMin = gulp.src(pathProd + '/tmp/*.html')
+		.pipe(htmlmin({collapseWhitespace: true}))
 		.pipe(gulp.dest(pathProd + '/'));
 		
 	let buildCssStyles = gulp.src([

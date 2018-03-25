@@ -1,10 +1,12 @@
-const gulp           = require('gulp'),
+const combine 	   = require('../../options/combine');
+
+const gulp         = require('gulp'),
 	del            = require("del"),
 	browserSync    = require('browser-sync'),
 	requireDir     = require('require-dir');
 	
-let pathDev = '../../dev',
-	pathStage = '../../staging';
+let pathDev = combine.path.dev,
+	pathStage = combine.path.staging;
 
 requireDir('tasks', { recurse: true });
 
@@ -15,6 +17,7 @@ gulp.task('browser-sync', function() {
 			baseDir: pathStage
 		},
 		notify: false
+		// tunnel: true
 	});
 });
 

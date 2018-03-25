@@ -1,11 +1,12 @@
+const combine = require('../../../options/combine');
 const gulp           = require('gulp'),
     concat         = require('gulp-concat'),
     uglify         = require('gulp-uglify'),
     plumber        = require('gulp-plumber'),
     babel          = require('gulp-babel');
 
-let pathDev = '../../dev',
-    pathStage = '../../staging';
+let pathDev = combine.path.dev,
+    pathStage = combine.path.staging;
 
 gulp.task('script', function() {
 	return gulp.src([

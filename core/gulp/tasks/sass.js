@@ -1,15 +1,16 @@
+const combine = require('../../../options/combine');
 const gulp           = require('gulp'),
-		sass           = require('gulp-sass'),
+	sass           = require('gulp-sass'),
     cleanCSS       = require('gulp-clean-css'),
-		rename         = require('gulp-rename'),
+	rename         = require('gulp-rename'),
     browserSync    = require('browser-sync'),
-		notify         = require('gulp-notify'),
-		autoprefixer   = require('gulp-autoprefixer');
+	notify         = require('gulp-notify'),
+	autoprefixer   = require('gulp-autoprefixer');
 		
-let pathDev = '../../dev',
-		pathStage = '../../staging';
+let pathDev = combine.path.dev,
+	pathStage = combine.path.staging;
 
-gulp.task('sass', ["styles"], function() {
+gulp.task('sass', ['styles'], function() {
 	return gulp.src(pathDev + '/sass/*.sass')
 		.pipe(sass({outputStyle: 'expand'}).on("error", notify.onError()))
 		.pipe(rename({suffix: '.min', prefix : ''}))
