@@ -3,7 +3,7 @@ const path = require('path');
 const pathProject = path.join(__dirname, '../../app');
 
 module.exports.listFiles = {
-    js: {   
+    script: {   
         options: {
             extension: combine.generator.js,
         },
