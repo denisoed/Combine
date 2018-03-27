@@ -1,0 +1,42 @@
+include layouts/head
+doctype html
+html(lang="en")
+  block head
+    head
+      +head({
+        "title": "Combine",
+				"author": "Denisoed",
+				"description": "Start template",
+        "criticalCss": "index_critical"
+      })
+      meta(property='og:url', content='https://site.com')
+      meta(property='og:type', content='website')
+      meta(property='og:title', content='Title')
+      meta(property='og:description', content='Description')
+      meta(property='og:image', content='https://site.com/img/path/..')
+
+  body
+    //- ///////////////////////Code////////////////////////
+    //- //////////////////// End Code /////////////////////
+  block styles
+    //build:css css/styles.min.css
+    link(rel="stylesheet" href="css/libs.min.css")
+    link(rel="stylesheet" href="css/base.min.css")
+    //endbuild
+
+    //---------Change the file with the styles for the corresponding-------\\
+    link(rel="stylesheet" href="css/styles/index.min.css")
+    
+  block vendors
+    //build:js js/scripts.min.js
+    script(src="libs/jquery/dist/jquery.min.js")
+    script(src="js/script.min.js")
+    //endbuild
+
+  // Global site tag (gtag.js) - Google Analytics
+  script(async, src='https://www.googletagmanager.com/gtag/js?id=UA-83208754-6')
+  script.
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-83208754-6');

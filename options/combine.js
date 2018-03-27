@@ -5,7 +5,7 @@ module.exports.path = {
 }
 
 module.exports.generator = {
+    scripts: 'js',
     styles: 'sass',
-    js: 'js',
-    template: 'pug'
+    templates: 'pug'
 }

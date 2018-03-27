@@ -1,79 +1,65 @@
 const fs = require('fs');
 const path = require('path');
-const files = require('./files');
+const ncp = require('ncp').ncp;
+const combine = require('../../options/combine');
 const rootPath = path.join(__dirname, '../../');
+
+let srcPath = path.dirname(require.main.filename);
+
+ncp.limit = 16;
 
 let folders = {
     rootFolder:  'tmp',
-    mainFolders:  {
-        'dev': [
-            files.listFiles.script.options.extension,
-            files.listFiles.style.options.extension,
-            files.listFiles.template.options.extension
-        ], 
-        'staging': ['fonts', 'img']
-    }  
-}
-
-let extension = {
-    script: files.listFiles.script.options.extension,
-    style: files.listFiles.style.options.extension,
-    template: files.listFiles.template.options.extension
-}
-
-let allFiles = {
-    script: files.listFiles.script.list,
-    style: files.listFiles.style.list,
-    template: files.listFiles.template.list
+    mainFolders: ['dev', 'staging']
 }
 
 class GenerateStartProject {
 
-    constructor(extension = {}, folders = {}, files = {}) {
+    constructor(folders = []) {
         this.root = folders.rootFolder;
-        this.extension = extension;
         this.main = folders.mainFolders;
-        this.files = files;
     }
 
     generateMainFolder() {
-
         fs.mkdirSync(rootPath + '/' + this.root );
 
-        for (let i = 0; i < Object.keys(this.main).length; i++) {
-            fs.mkdirSync(rootPath + this.root + '/' + Object.keys(this.main)[i] );
+        for (let i = 0; i < this.main.length; i++) {
+            fs.mkdirSync(rootPath + this.root + '/' + this.main[i] );
         }
-
-        for (let i = 0; i < this.main.dev.length; i++) {
-            fs.mkdirSync(rootPath + this.root + '/' + Object.keys(this.main)[0] + '/' + this.main.dev[i]);
-        }
-
-        for (let i = 0; i < this.main.staging.length; i++) {
-            fs.mkdirSync(rootPath + this.root + '/' + Object.keys(this.main)[1] + '/' + this.main.staging[i]);
-        }
-
     }
 
-    generateScript() {
-    
-        let scriptPath = rootPath + '/' + this.root + '/' + Object.keys(this.main)[0] + '/' + this.extension.script;
-    
-        for (let i = 0; i < this.files.script.length; i++) {
-            let content = this.files.script[i].content;
-            let stream = fs.createWriteStream(
-                scriptPath + '/' + this.files.script[i].name + '.' + 
-                this.extension.script
-            );
-            stream.once('open', function(fd) {
-                stream.write(content);
-                stream.end();
-            });   
-        }
+    generateScripts() {
+        ncp(srcPath + '/scripts/' + combine.generator.scripts, rootPath + '/tmp/dev/' + combine.generator.scripts, (err) => {
+            if (err) {
+                return console.error(err);
+            }
+            console.log('Coping script files complete!');
+        });
+    }
+
+    generateStyles() {
+        ncp(srcPath + '/styles/' + combine.generator.styles, rootPath + '/tmp/dev/' + combine.generator.styles, (err) => {
+            if (err) {
+                return console.error(err);
+            }
+            console.log('Coping style files complete!');
+        });
+    }
+
+    generateTemplates() {
+        ncp(srcPath + '/templates/' + combine.generator.templates, rootPath + '/tmp/dev/' + combine.generator.templates, (err) => {
+            if (err) {
+                return console.error(err);
+            }
+            console.log('Coping template files complete!');
+        });
     }
 
 }
 
-let GProject = new GenerateStartProject(extension, folders, allFiles);
+let GProject = new GenerateStartProject(folders);
 
 GProject.generateMainFolder();
-GProject.generateScript();
+GProject.generateScripts();
+GProject.generateStyles();
+GProject.generateTemplates();
