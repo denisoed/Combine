@@ -8,7 +8,7 @@ const gulp           = require('gulp'),
 let pathDev = combine.path.dev,
     pathStage = combine.path.staging;
 
-gulp.task('script', function() {
+gulp.task('js', function() {
 	return gulp.src([
 		pathDev + '/js/script.js',
         ])

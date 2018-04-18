@@ -8,6 +8,10 @@ const gulp         = require('gulp'),
 let pathDev = combine.path.dev,
 	pathStage = combine.path.staging;
 
+let styles = combine.generator.styles,
+	scripts = combine.generator.scripts,
+	templates = combine.generator.templates;
+
 requireDir('tasks', { recurse: true });
 
 
@@ -30,13 +34,13 @@ gulp.task('default-folder', ['clean'], function() {
 		.pipe(gulp.dest(pathStage + '/shared/default'));
 });
 
-gulp.task('watch', ['sass', 'pug', 'script', 'default-folder', 'browser-sync'], function() {
-	gulp.watch(pathDev   +  '/sass/styles/*.sass', ['styles']);
-	gulp.watch(pathDev   +  '/sass/styles/critical/*.sass', ['critical']);
-	gulp.watch(pathDev   +  '/sass/*.sass', ['sass']);
+gulp.task('watch', [styles, templates, scripts, 'default-folder', 'browser-sync'], function() {
+	gulp.watch(pathDev   +  styles + '/styles/*.' + styles, ['styles']);
+	gulp.watch(pathDev   +  styles + '/styles/critical/*.' + styles, ['critical']);
+	gulp.watch(pathDev   +  styles + '/*.' + styles, [styles]);
+	gulp.watch(pathDev   +  templates + '/*.' + templates, [templates]);
+	gulp.watch(pathDev   +  scripts + '/script.js', [scripts]);
 	gulp.watch(pathStage + '/*.html', browserSync.reload);
-	gulp.watch(pathDev   +  '/pug/*.pug', ['pug']);
-	gulp.watch(pathDev   +  '/js/script.js', ['script']);
 	gulp.watch(pathDev   +  '/default/**/*', ['default-folder']);
 });
 

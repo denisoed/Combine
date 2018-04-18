@@ -4,7 +4,7 @@
   "description": "The starting template for site layout, using the sass and pug preprocessor. Multy page site!",
   "main": "index.js",
   "scripts": {
-    "start": "npm i && bower i",
+    "start": "npm i",
     "combine": "gulp --gulpfile core/gulp/gulpfile.js",
     "build": "gulp build --gulpfile core/gulp/gulpfile.js",
     "g-grid": "node ./options/grid.js",
@@ -32,6 +32,7 @@
     "gulp-htmlmin": "^4.0.0",
     "gulp-if": "^2.0.2",
     "gulp-imagemin": "^3.0.3",
+    "gulp-less": "^4.0.0",
     "gulp-notify": "^3.0.0",
     "gulp-plumber": "^1.2.0",
     "gulp-pug": "^3.2.0",

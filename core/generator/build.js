@@ -9,7 +9,7 @@ let srcPath = path.dirname(require.main.filename);
 ncp.limit = 16;
 
 let folders = {
-    rootFolder:  'tmp',
+    rootFolder:  'app',
     mainFolders: ['dev', 'staging']
 }
 
@@ -29,29 +29,29 @@ class GenerateStartProject {
     }
 
     generateScripts() {
-        ncp(srcPath + '/scripts/' + combine.generator.scripts, rootPath + '/tmp/dev/' + combine.generator.scripts, (err) => {
+        ncp(srcPath + '/scripts/' + combine.generator.scripts, rootPath + '/app/dev/' + combine.generator.scripts, (err) => {
             if (err) {
                 return console.error(err);
             }
-            console.log('Coping script files complete!');
+            console.log('Coping '+ combine.generator.scripts +' files complete!');
         });
     }
 
     generateStyles() {
-        ncp(srcPath + '/styles/' + combine.generator.styles, rootPath + '/tmp/dev/' + combine.generator.styles, (err) => {
+        ncp(srcPath + '/styles/' + combine.generator.styles, rootPath + '/app/dev/' + combine.generator.styles, (err) => {
             if (err) {
                 return console.error(err);
             }
-            console.log('Coping style files complete!');
+            console.log('Coping '+ combine.generator.styles +' files complete!');
         });
     }
 
     generateTemplates() {
-        ncp(srcPath + '/templates/' + combine.generator.templates, rootPath + '/tmp/dev/' + combine.generator.templates, (err) => {
+        ncp(srcPath + '/templates/' + combine.generator.templates, rootPath + '/app/dev/' + combine.generator.templates, (err) => {
             if (err) {
                 return console.error(err);
             }
-            console.log('Coping template files complete!');
+            console.log('Coping '+ combine.generator.templates +' files complete!');
         });
     }
 
