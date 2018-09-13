@@ -1,65 +1,63 @@
 const fs = require('fs');
 const path = require('path');
 const ncp = require('ncp').ncp;
-const combine = require('../../options/combine');
+// const combine = require('../../options/combine');
+
 const rootPath = path.join(__dirname, '../../');
-
-let srcPath = path.dirname(require.main.filename);
-
-ncp.limit = 16;
-
-let folders = {
+const srcPath = path.dirname(require.main.filename);
+const folders = {
     rootFolder:  'app',
     mainFolders: ['dev', 'staging']
 }
+const languages = {
+    templates: process.argv.slice(2)[0] || 'html',
+    styles: process.argv.slice(2)[1] || 'css',
+    scripts: process.argv.slice(2)[2] || 'js',
+}
+
+ncp.limit = 16;
 
 class GenerateStartProject {
 
-    constructor(folders = []) {
+    constructor(folders = [], languages) {
         this.root = folders.rootFolder;
         this.main = folders.mainFolders;
+        this.languages = languages;
     }
 
     generateMainFolder() {
-        fs.mkdirSync(rootPath + '/' + this.root );
-
-        for (let i = 0; i < this.main.length; i++) {
-            fs.mkdirSync(rootPath + this.root + '/' + this.main[i] );
+        try {
+            fs.mkdirSync(rootPath + '/' + this.root );
+    
+            for (let i = 0; i < this.main.length; i++) {
+                fs.mkdirSync(rootPath + this.root + '/' + this.main[i] );
+            }
+        } catch (error) {
+            console.error('Basic folder structure already exists');
+        }
+    }
+    
+    generateFolderStructure() {
+        let langKeys = Object.keys(this.languages);
+        for (let i = 0; i < langKeys.length; i++) {
+            ncp(`${srcPath}/${langKeys[i]}/${this.languages[langKeys[i]]}`, rootPath + '/app/dev/' + this.languages[langKeys[i]], (err) => {
+                if (err) {
+                    return console.error(err);
+                }
+                console.log('Coping ' + this.languages[langKeys[i]] + ' files complete!');
+            }); 
         }
     }
 
-    generateScripts() {
-        ncp(srcPath + '/scripts/' + combine.generator.scripts, rootPath + '/app/dev/' + combine.generator.scripts, (err) => {
-            if (err) {
-                return console.error(err);
-            }
-            console.log('Coping '+ combine.generator.scripts +' files complete!');
-        });
-    }
+    generate() {
+        // Create main folder
+        this.generateMainFolder();
 
-    generateStyles() {
-        ncp(srcPath + '/styles/' + combine.generator.styles, rootPath + '/app/dev/' + combine.generator.styles, (err) => {
-            if (err) {
-                return console.error(err);
-            }
-            console.log('Coping '+ combine.generator.styles +' files complete!');
-        });
+        // Paste selected languages in main folder
+        this.generateFolderStructure();
     }
-
-    generateTemplates() {
-        ncp(srcPath + '/templates/' + combine.generator.templates, rootPath + '/app/dev/' + combine.generator.templates, (err) => {
-            if (err) {
-                return console.error(err);
-            }
-            console.log('Coping '+ combine.generator.templates +' files complete!');
-        });
-    }
-
 }
 
-let GProject = new GenerateStartProject(folders);
+let GProject = new GenerateStartProject(folders, languages);
 
-GProject.generateMainFolder();
-GProject.generateScripts();
-GProject.generateStyles();
-GProject.generateTemplates();
+GProject.generate();
