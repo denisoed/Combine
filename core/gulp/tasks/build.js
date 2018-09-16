@@ -60,7 +60,6 @@ gulp.task('build', ['removedist', 'clearcache', 'imagemin', 'sass'], function() 
 
 });
 
-
 gulp.task('imagemin', function() {
 	return gulp.src(pathStage + '/img/**/*')
 		.pipe(cache(imagemin({

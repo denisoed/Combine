@@ -3,13 +3,18 @@
   "version": "1.0.0",
   "description": "The starting template for site layout, using the sass and pug preprocessor. Multy page site!",
   "main": "index.js",
-  "scripts": {
-    "start": "npm i",
-    "combine": "gulp --gulpfile core/gulp/gulpfile.js",
-    "build": "gulp build --gulpfile core/gulp/gulpfile.js",
-    "g-grid": "node ./options/grid.js",
-    "generate": "node ./core/generator/build.js"
+  "bin": {
+    "combine init": "./index.js"
   },
+  "scripts": {
+    "combine-init": "node ./index.js",
+    "combine-libs": "npm i --customPath=addons",
+    "combine": "gulp --gulpfile core/gulp/gulpfile.js",
+    "combine-prod": "gulp build --gulpfile core/gulp/gulpfile.js",
+    "combine-grid": "node ./options/grid.js",
+    "combine-generate": "node ./core/generator/build.js"
+  },
+  "repository": "https://github.com/denisoed/start_template.git",
   "author": "Denisoed",
   "license": "ISC",
   "devDependencies": {
@@ -41,9 +46,16 @@
     "gulp-sass": "^3.1.0",
     "gulp-uglify": "^3.0.0",
     "gulp-useref": "^3.1.4",
+    "chalk": "^2.4.1",
+    "figlet": "^1.2.0",
+    "inquirer": "^6.0.0",
+    "shelljs": "^0.8.2",
     "imagemin-pngquant": "^5.0.0",
     "ncp": "^2.0.0",
     "require-dir": "^0.3.1",
     "smart-grid": "^2.0.1"
+  },
+  "dependencies": {
+    "jquery": "^3.3.1"
   }
 }

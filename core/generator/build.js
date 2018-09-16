@@ -27,8 +27,8 @@ class GenerateStartProject {
 
     generateMainFolder() {
         try {
-            fs.mkdirSync(rootPath + '/' + this.root );
-    
+            fs.mkdirSync(rootPath + '/' + this.root);
+            
             for (let i = 0; i < this.main.length; i++) {
                 fs.mkdirSync(rootPath + this.root + '/' + this.main[i] );
             }
