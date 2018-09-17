@@ -1,0 +1,7 @@
+{
+    "langs": {
+        "templates": ".pug",
+        "styles": ".less",
+        "scripts": ".js"
+    }
+}

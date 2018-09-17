@@ -1,8 +1,9 @@
-var smartgrid = require('../node_modules/smart-grid/index.js');
+const config = require('../../options/config');
+const smartgrid = require('smart-grid');
 
-var settings = {
+let settings = {
     filename: '_grid',
-    outputStyle: 'sass', /* less || scss || sass || styl */
+    outputStyle: config.langs.styles, /* less || scss || sass || styl */
     columns: 12, /* number of grid columns */
     offset: '30px', /* gutter width px || % */
     mobileFirst: false, /* mobileFirst ? 'min-width' : 'max-width' */
