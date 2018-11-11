@@ -10,7 +10,7 @@ let pathDev = config.paths.dev,
 
 gulp.task('js', function() {
 	return gulp.src([
-		pathDev + '/js/script.js',
+		'../../' + pathDev + '/js/script.js',
         ])
     .pipe(plumber())
     .pipe(babel({
@@ -19,5 +19,5 @@ gulp.task('js', function() {
     }))
 	.pipe(concat('script.min.js'))
 	.pipe(uglify())
-	.pipe(gulp.dest(pathStage + '/js'));
+	.pipe(gulp.dest('../../' + pathStage + '/js'));
 });

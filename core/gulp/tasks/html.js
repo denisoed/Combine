@@ -7,10 +7,10 @@ let pathDev = config.paths.dev,
 console.log(pathStage);
 
 gulp.task('pug', function() {
-  gulp.src(pathDev + '/pug/*.pug')
+  return gulp.src('../../' + pathDev + '/pug/*.pug')
     .pipe( pug({
         pretty: true,
       })
     )
-    .pipe( gulp.dest('../../../' + pathStage) );
+    .pipe( gulp.dest('../../' + pathStage) );
 });
