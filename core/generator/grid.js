@@ -3,7 +3,7 @@ const smartgrid = require('smart-grid');
 
 let settings = {
     filename: '_grid',
-    outputStyle: config.langs.styles, /* less || scss || sass || styl */
+    outputStyle: 'sass', /* less || scss || sass || styl */
     columns: 12, /* number of grid columns */
     offset: '30px', /* gutter width px || % */
     mobileFirst: false, /* mobileFirst ? 'min-width' : 'max-width' */

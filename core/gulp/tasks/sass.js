@@ -1,4 +1,4 @@
-const combine = require('../../../options/combine');
+const config = require('../../../options/config');
 const gulp           = require('gulp'),
 	sass           = require('gulp-sass'),
     cleanCSS       = require('gulp-clean-css'),
@@ -7,8 +7,8 @@ const gulp           = require('gulp'),
 	notify         = require('gulp-notify'),
 	autoprefixer   = require('gulp-autoprefixer');
 		
-let pathDev = combine.path.dev,
-	pathStage = combine.path.staging;
+let pathDev = config.paths.dev,
+	pathStage = config.paths.staging;
 
 gulp.task('sass', ['styles'], function() {
 	return gulp.src(pathDev + '/sass/*.sass')

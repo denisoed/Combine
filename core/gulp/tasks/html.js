@@ -1,9 +1,10 @@
-const combine = require('../../../options/combine');
+const config = require('../../../options/config');
 const gulp   = require('gulp'),
     pug    = require('gulp-pug');
 
-let pathDev = combine.path.dev,
-    pathStage = combine.path.staging;
+let pathDev = config.paths.dev,
+    pathStage = config.paths.staging;
+console.log(pathStage);
 
 gulp.task('pug', function() {
   gulp.src(pathDev + '/pug/*.pug')
@@ -11,5 +12,5 @@ gulp.task('pug', function() {
         pretty: true,
       })
     )
-    .pipe( gulp.dest(pathStage) );
+    .pipe( gulp.dest('../../../' + pathStage) );
 });

@@ -1,33 +1,22 @@
 {
-    "paths": {
-        "dev": "app/dev",
-        "staging": "app/staging",
-        "prodaction": "app/prod"
-    },
     "questions": [
         {
             "type": "list",
             "name": "TemplateType",
             "message": "Select template",
-            "choices": [".html", ".pug"]
+            "choices": ["html", "pug"]
         },
         {
             "type": "list",
             "name": "StylesType",
             "message": "Select styles",
-            "choices": [".sass ", ".less"]
+            "choices": ["sass", "less"]
         },
         {
             "type": "list",
             "name": "ScriptsType",
             "message": "Select sctipts",
-            "choices": [".js"]
-        },
-        {
-            "type": "list",
-            "name": "GridType",
-            "message": "Select grid system",
-            "choices": ["bootstrap-4-grid", "smart-grid"]
+            "choices": ["js"]
         }
     ]
 }

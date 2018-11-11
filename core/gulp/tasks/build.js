@@ -1,4 +1,4 @@
-const combine = require('../../../options/combine');
+const config = require('../../../options/config');
 
 const gulp           = require('gulp'),
 	del            = require('del'),
@@ -14,9 +14,9 @@ const gulp           = require('gulp'),
 	htmlmin        = require('gulp-htmlmin'),
 	gulpRemoveHtml = require('gulp-remove-html');
 
-let pathDev = combine.path.dev,
-	pathStage = combine.path.staging,
-	pathProd = combine.path.prodaction;
+let pathDev = config.paths.dev,
+	pathStage = config.paths.staging,
+	pathProd = config.paths.prodaction;
 
 gulp.task('build', ['removedist', 'clearcache', 'imagemin', 'sass'], function() {
 	
