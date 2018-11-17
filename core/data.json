@@ -16,7 +16,7 @@
             "type": "list",
             "name": "ScriptsType",
             "message": "Select sctipts",
-            "choices": ["js"]
+            "choices": ["js", "coffee"]
         }
     ]
 }

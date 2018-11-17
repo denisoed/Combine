@@ -42,7 +42,7 @@ gulp.task('watch', [styles, templates, scripts, 'default-folder', 'browser-sync'
 	gulp.watch(pathDev + '/' + styles + '/styles/critical/*.' + styles, ['critical']);
 	gulp.watch(pathDev + '/' + styles + '/*.' + styles, [styles]);
 	gulp.watch(pathDev + '/' + templates + '/*.' + templates, [templates]);
-	gulp.watch(pathDev + '/' + scripts + '/script.js', [scripts]);
+	gulp.watch(pathDev + '/' + scripts + '/*.' + scripts, [scripts]);
 	gulp.watch(pathStage + '/*.html', browserSync.reload);
 	gulp.watch(pathDev + '/default/**/*', ['default-folder']);
 });
