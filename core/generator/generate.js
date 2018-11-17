@@ -1,7 +1,6 @@
 const fs = require('fs');
 const path = require('path');
 const ncp = require('ncp').ncp;
-// const combine = require('../../options/combine');
 
 const rootPath = path.join(__dirname, '../../');
 const srcPath = path.dirname(require.main.filename);
@@ -34,6 +33,7 @@ class GenerateStartProject {
             }
         } catch (error) {
             console.error('Basic folder structure already exists');
+            process.exit();
         }
     }
     

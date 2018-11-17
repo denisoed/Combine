@@ -29,7 +29,7 @@ class Main {
   };
 
   createConfigFile(options) {
-    let config = {
+    const config = {
       paths: basic.paths,
       langs: {
         templates: options.TemplateType,
@@ -38,20 +38,25 @@ class Main {
       }
     };
 
-    fs.mkdirSync("options", (err) => {
-      if (err) {
-        console.error(err);
-        return;
-      };
-      console.log("Folder has been created");
-    });
+    try {
+      fs.mkdirSync("options", (err) => {
+        if (err) {
+          console.error(err);
+          return;
+        };
+        console.log("Folder has been created");
+      });
+    } catch (error) {
+      console.log('Options folder already exists');
+      process.exit();
+    }
 
     fs.writeFile("./options/config.json", JSON.stringify(config, null, 4), (err) => {
       if (err) {
         console.error(err);
         return;
       };
-      console.log("File has been created");
+      console.log("Files has been created");
     });
   };
 
@@ -80,7 +85,7 @@ const run = async () => {
   // create the config file
   main.createConfigFile(answers);
 
-  // // Project setup
+  // Project setup
   main.projectSetup(answers);
 
   // show success message
