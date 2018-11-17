@@ -14,11 +14,10 @@ const gulp           = require('gulp'),
 	htmlmin        = require('gulp-htmlmin'),
 	gulpRemoveHtml = require('gulp-remove-html');
 
-let pathDev = config.paths.dev,
-	pathStage = config.paths.staging,
-	pathProd = config.paths.prodaction;
+let pathStage = '../../' + config.paths.staging,
+	pathProd = '../../' + config.paths.production;
 
-gulp.task('build', ['removedist', 'clearcache', 'imagemin', 'sass'], function() {
+gulp.task('build', ['removedist', 'clearcache', 'imagemin'], function() {
 	
 	let buildHtml = gulp.src(pathStage + '/*.html')
 		.pipe(useref())
@@ -35,7 +34,7 @@ gulp.task('build', ['removedist', 'clearcache', 'imagemin', 'sass'], function() 
 		.pipe(gulp.dest(pathProd + '/'));
 		
 	let buildCssStyles = gulp.src([
-		pathStage + '/css/styles.min.css'
+		pathStage + '/css/**/*.css'
 	]).pipe(gulp.dest(pathProd + '/css'));
 
 	let buildJs = gulp.src([
