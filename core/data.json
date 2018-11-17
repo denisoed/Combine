@@ -4,13 +4,13 @@
             "type": "list",
             "name": "TemplateType",
             "message": "Select template",
-            "choices": ["pug"]
+            "choices": ["html", "pug"]
         },
         {
             "type": "list",
             "name": "StylesType",
             "message": "Select styles",
-            "choices": ["sass", "scss"]
+            "choices": ["scss", "sass"]
         },
         {
             "type": "list",
