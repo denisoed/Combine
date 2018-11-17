@@ -25,7 +25,7 @@ class GenerateStartProject {
         this.languages = languages;
     }
 
-    generateMainFolder() {
+    createMainFolder() {
         try {
             fs.mkdirSync(rootPath + '/' + this.root);
             
@@ -37,24 +37,31 @@ class GenerateStartProject {
         }
     }
     
-    generateFolderStructure() {
+    copyInitialFiles() {
         let langKeys = Object.keys(this.languages);
         for (let i = 0; i < langKeys.length; i++) {
             ncp(`${srcPath}/${langKeys[i]}/${this.languages[langKeys[i]]}`, rootPath + '/app/dev/' + this.languages[langKeys[i]], (err) => {
                 if (err) {
                     return console.error(err);
                 }
-                console.log('Coping ' + this.languages[langKeys[i]] + ' files complete!');
+                console.log('📥 ' + ' - Coping ' + this.languages[langKeys[i]] + ' files complete!');
             }); 
         }
+
+        ncp(`${srcPath}/staging`, rootPath + '/app/staging', function (err) {
+            if (err) {
+                return console.error(err);
+            }
+            console.log('📥 ' + ' - Coping staging files complete!');
+        });   
     }
 
     generate() {
         // Create main folder
-        this.generateMainFolder();
+        this.createMainFolder();
 
         // Paste selected languages in main folder
-        this.generateFolderStructure();
+        this.copyInitialFiles();
     }
 }
 
