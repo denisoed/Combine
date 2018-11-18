@@ -1,4 +1,4 @@
-const config = require('../../../options/config');
+const init = require('../../../core/init');
 const gulp           = require('gulp'),
 	sass           = require('gulp-sass'),
     cleanCSS       = require('gulp-clean-css'),
@@ -7,8 +7,8 @@ const gulp           = require('gulp'),
 	notify         = require('gulp-notify'),
 	autoprefixer   = require('gulp-autoprefixer');
 		
-let pathDev = '../../' + config.paths.dev,
-	pathStage = '../../' + config.paths.staging;
+let pathDev = '../../' + init.paths.dev,
+	pathStage = '../../' + init.paths.staging;
 
 gulp.task('scss', ['page-styles_scss'], function() {
 	return gulp.src(pathDev + '/scss/*.scss')

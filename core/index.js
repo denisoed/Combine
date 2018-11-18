@@ -4,12 +4,11 @@ const chalk = require("chalk");
 const figlet = require("figlet");
 const shell = require("shelljs");
 
-const data = require('./data.json');
-const basic = require('./basic.json');
+const config = require('./config.json');
 
 class Main {
-  constructor(data) {
-    this.data = data;
+  constructor(config) {
+    this.config = config;
   }
 
   init() {
@@ -25,43 +24,31 @@ class Main {
   };
 
   askQuestions() {
-    return inquirer.prompt(this.data.questions);
+    return inquirer.prompt(this.config.questions);
   };
 
-  createConfigFile(options) {
-    const config = {
-      paths: basic.paths,
+  createInitFile(data) {
+    const init = {
+      paths: this.config.paths,
       langs: {
-        templates: options.TemplateType,
-        styles: options.StylesType,
-        scripts: options.ScriptsType,
-      }
+        templates: data.TemplateType,
+        styles: data.StylesType,
+        scripts: data.ScriptsType,
+      },
+      grids: data.GridType
     };
 
-    try {
-      fs.mkdirSync("options", (err) => {
-        if (err) {
-          console.error(err);
-          return;
-        };
-        console.log("Folder has been created");
-      });
-    } catch (error) {
-      console.log('Options folder already exists');
-      process.exit();
-    }
-
-    fs.writeFile("./options/config.json", JSON.stringify(config, null, 4), (err) => {
+    fs.writeFile("./core/init.json", JSON.stringify(init, null, 4), (err) => {
       if (err) {
         console.error(err);
         return;
       };
-      console.log("Files has been created");
+      console.log("Init file has been created");
     });
   };
 
   projectSetup(languages) {
-    shell.exec(`npm run combine-generate ${languages.TemplateType} ${languages.StylesType} ${languages.ScriptsType}`);
+    shell.exec(`npm run combine-generate ${languages.TemplateType} ${languages.StylesType} ${languages.ScriptsType} ${languages.GridType}`);
   }
 
   success() {
@@ -74,7 +61,7 @@ class Main {
 
 const run = async () => {
 
-  const main = new Main(data);
+  const main = new Main(config);
 
   // show script introduction
   main.init();
@@ -83,7 +70,7 @@ const run = async () => {
   const answers = await main.askQuestions();
 
   // create the config file
-  main.createConfigFile(answers);
+  main.createInitFile(answers);
 
   // Project setup
   main.projectSetup(answers);

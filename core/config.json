@@ -1,4 +1,9 @@
 {
+    "paths": {
+        "dev": "app/dev",
+        "staging": "app/staging",
+        "production": "app/prod"
+    },
     "questions": [
         {
             "type": "list",
@@ -17,6 +22,12 @@
             "name": "ScriptsType",
             "message": "Select sctipts",
             "choices": ["js", "coffee"]
+        },
+        {
+            "type": "list",
+            "name": "GridType",
+            "message": "Select grid system",
+            "choices": ["Nothing", "bootstrap4", "smart-grid"]
         }
     ]
 }

@@ -1,4 +1,4 @@
-const config  = require('../../../options/config');
+const init  = require('../../../core/init');
 const gulp = require('gulp');
 const pug = require('gulp-pug');
 const handlebars = require('gulp-handlebars');
@@ -6,8 +6,8 @@ const wrap = require('gulp-wrap');
 const declare = require('gulp-declare');
 const concat = require('gulp-concat');
 
-let pathDev = '../../' + config.paths.dev,
-    pathStage = '../../' + config.paths.staging;
+let pathDev = '../../' + init.paths.dev,
+    pathStage = '../../' + init.paths.staging;
 
 gulp.task('pug', function() {
   return gulp.src(pathDev + '/pug/*.pug')
