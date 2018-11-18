@@ -21,7 +21,7 @@ mixin head(data)
     meta(name="apple-mobile-web-app-status-bar-style" content="#000")
 
     style.
-        @@include('css/styles/critical/#{data.criticalCss}.min.css')
+        @@include('css/critical/#{data.criticalCss}.min.css');
     <!--<Deject>-->
-    link(rel="stylesheet", href="css/styles/critical/"+ data.criticalCss +".min.css")
+    link(rel="stylesheet", href="css/critical/"+ data.criticalCss +".min.css")
     <!--</Deject>-->

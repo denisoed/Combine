@@ -4,19 +4,19 @@
             "type": "list",
             "name": "TemplateType",
             "message": "Select template",
-            "choices": ["pug"]
+            "choices": ["html", "pug"]
         },
         {
             "type": "list",
             "name": "StylesType",
             "message": "Select styles",
-            "choices": ["sass"]
+            "choices": ["scss", "sass", "less"]
         },
         {
             "type": "list",
             "name": "ScriptsType",
             "message": "Select sctipts",
-            "choices": ["js"]
+            "choices": ["js", "coffee"]
         }
     ]
 }

@@ -5,7 +5,6 @@
 		font-style: $style;
 		
 		@if ($asset-pipeline == true) {
-			
 			src: font-url('#{$file-path}.eot');
 			src: font-url('#{$file-path}.eot?#iefix') format('embedded-opentype'), font-url('#{$file-path}.woff') format('woff'), font-url('#{$file-path}.ttf') format('truetype');
 		} @else {
