@@ -56,14 +56,16 @@ class GenerateStartProject {
     }
     
     setGridSystem() {
-        ncp(`${srcPath}/grids/${this.grids}/_grid.${this.langs.styles}`,
-            `${rootPath}/app/dev/${this.langs.styles}/_grid.${this.langs.styles}`,
-            function (err) {
-            if (err) {
-                return console.error(err);
-            }
-            console.log('📥 ' + ' - Coping grid file complete!');
-        });   
+        if (this.grids != 'Nothing') {
+            ncp(`${srcPath}/grids/${this.grids}/_grid.${this.langs.styles}`,
+                `${rootPath}/app/dev/${this.langs.styles}/_grid.${this.langs.styles}`,
+                function (err) {
+                if (err) {
+                    return console.error(err);
+                }
+                console.log('📥 ' + ' - Coping grid file complete!');
+            });   
+        }
     }
 
     generate() {

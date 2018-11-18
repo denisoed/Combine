@@ -27,7 +27,7 @@
             "type": "list",
             "name": "GridType",
             "message": "Select grid system",
-            "choices": ["bootstrap4", "smart-grid"]
+            "choices": ["Nothing", "bootstrap4", "smart-grid"]
         }
     ]
 }
