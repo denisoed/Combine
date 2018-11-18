@@ -10,7 +10,7 @@
             "type": "list",
             "name": "StylesType",
             "message": "Select styles",
-            "choices": ["scss", "sass"]
+            "choices": ["scss", "sass", "less"]
         },
         {
             "type": "list",

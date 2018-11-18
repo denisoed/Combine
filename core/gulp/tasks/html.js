@@ -6,25 +6,25 @@ const wrap = require('gulp-wrap');
 const declare = require('gulp-declare');
 const concat = require('gulp-concat');
 
-let pathDev = config.paths.dev,
-    pathStage = config.paths.staging;
+let pathDev = '../../' + config.paths.dev,
+    pathStage = '../../' + config.paths.staging;
 
 gulp.task('pug', function() {
-  return gulp.src('../../' + pathDev + '/pug/*.pug')
+  return gulp.src(pathDev + '/pug/*.pug')
     .pipe( pug({
         pretty: true,
       })
     )
-    .pipe(gulp.dest('../../' + pathStage));
+    .pipe(gulp.dest(pathStage));
   });
   
 gulp.task('html', function () {
-    return gulp.src('../../' + pathDev + '/html/**/*.html')
-    .pipe(gulp.dest('../../' + pathStage));
+    return gulp.src(pathDev + '/html/**/*.html')
+    .pipe(gulp.dest(pathStage));
 });
 
 gulp.task('hbs', function () {
-  gulp.src('../../' + pathDev + '/hbs/**/*.hbs')
+  gulp.src(pathDev + '/hbs/**/*.hbs')
     .pipe(handlebars())
     .pipe(wrap('Handlebars.template(<%= contents %>)'))
     .pipe(declare({
@@ -32,5 +32,5 @@ gulp.task('hbs', function () {
       noRedeclare: true, // Avoid duplicate declarations
     }))
     .pipe(concat('hbs.js'))
-    .pipe(gulp.dest('../../' + pathStage));
+    .pipe(gulp.dest(pathStage));
 });

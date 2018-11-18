@@ -10,7 +10,7 @@ const gulp           = require('gulp'),
 let pathDev = '../../' + config.paths.dev,
 	pathStage = '../../' + config.paths.staging;
 
-gulp.task('less', ['styles'], function() {
+gulp.task('less', ['page-styles_less'], function() {
 	return gulp.src([pathDev + '/less/*.less', '!' + pathDev + '/less/_*.less'])
 		.pipe(less({outputStyle: 'expand'}).on('error', notify.onError()))
 		.pipe(rename({suffix: '.min', prefix : ''}))
@@ -20,8 +20,8 @@ gulp.task('less', ['styles'], function() {
 		.pipe(browserSync.reload({stream: true}));
 });
 
-gulp.task('styles', function() {
-	return gulp.src([pathDev + '/less/styles/*.less', '!' + pathDev + '/less/styles/_*.less'])
+gulp.task('page-styles_less', function() {
+	return gulp.src([pathDev + '/less/page-styles/*.less', '!' + pathDev + '/less/page-styles/_*.less'])
 		.pipe(less({outputStyle: 'expand'}).on('error', notify.onError()))
 		.pipe(rename({suffix: '.min', prefix : ''}))
 		.pipe(autoprefixer(['last 15 versions']))
@@ -30,7 +30,7 @@ gulp.task('styles', function() {
 		.pipe(browserSync.reload({stream: true}))
 });
 
-gulp.task('critical', function() {
+gulp.task('critical-styles_less', function() {
 	return gulp.src([pathDev + '/less/critical/*.less', '!' + pathDev + '/less/critical/_*.less'])
 		.pipe(less({outputStyle: 'expand'}).on('error', notify.onError()))
 		.pipe(rename({suffix: '.min', prefix : ''}))

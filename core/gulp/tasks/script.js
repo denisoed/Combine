@@ -6,12 +6,12 @@ const gulp         = require('gulp'),
     coffee         = require('gulp-coffee'),
     babel          = require('gulp-babel');
 
-let pathDev = config.paths.dev,
-    pathStage = config.paths.staging;
+let pathDev = '../../' + config.paths.dev,
+    pathStage = '../../' + config.paths.staging;
 
 gulp.task('js', function() {
 	return gulp.src([
-		'../../' + pathDev + '/js/**/*.js',
+		pathDev + '/js/**/*.js',
         ])
     .pipe(plumber())
     .pipe(babel({
@@ -20,12 +20,12 @@ gulp.task('js', function() {
     }))
 	.pipe(concat('script.min.js'))
 	.pipe(uglify())
-	.pipe(gulp.dest('../../' + pathStage + '/js'));
+	.pipe(gulp.dest(pathStage + '/js'));
 });
 
 gulp.task('coffee', function () {
     return gulp.src([
-        '../../' + pathDev + '/coffee/**/*.coffee',
+        pathDev + '/coffee/**/*.coffee',
     ])
     .pipe(coffee({
         bare: true
@@ -37,5 +37,5 @@ gulp.task('coffee', function () {
     }))
     .pipe(concat('script.min.js'))
     .pipe(uglify())
-    .pipe(gulp.dest('../../' + pathStage + '/js'));
+    .pipe(gulp.dest(pathStage + '/js'));
 });
