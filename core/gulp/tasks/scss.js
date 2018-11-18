@@ -32,7 +32,7 @@ gulp.task('styles', function() {
 });
 
 gulp.task('critical', function() {
-	return gulp.src(pathDev + '/scss/styles/critical/*.scss')
+	return gulp.src(pathDev + '/scss/critical/*.scss')
 		.pipe(sass({outputStyle: 'expand'}).on("error", notify.onError()))
 		.pipe(rename({suffix: '.min', prefix : ''}))
 		.pipe(autoprefixer(['last 15 versions']))

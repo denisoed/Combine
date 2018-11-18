@@ -39,7 +39,7 @@ gulp.task('default-folder', ['clean'], function () {
 
 gulp.task('watch', [styles, templates, scripts, 'default-folder', 'browser-sync'], function () {
 	gulp.watch(pathDev + '/' + styles + '/styles/*.' + styles, ['styles']);
-	gulp.watch(pathDev + '/' + styles + '/styles/critical/*.' + styles, ['critical']);
+	gulp.watch(pathDev + '/' + styles + '/critical/*.' + styles, ['critical']);
 	gulp.watch(pathDev + '/' + styles + '/*.' + styles, [styles]);
 	gulp.watch(pathDev + '/' + templates + '/*.' + templates, [templates]);
 	gulp.watch(pathDev + '/' + scripts + '/*.' + scripts, [scripts]);
