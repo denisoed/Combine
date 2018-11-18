@@ -1,4 +1,4 @@
-const config = require('../../../options/config');
+const init = require('../../../core/init');
 const gulp         = require('gulp'),
     concat         = require('gulp-concat'),
     uglify         = require('gulp-uglify'),
@@ -6,8 +6,8 @@ const gulp         = require('gulp'),
     coffee         = require('gulp-coffee'),
     babel          = require('gulp-babel');
 
-let pathDev = '../../' + config.paths.dev,
-    pathStage = '../../' + config.paths.staging;
+let pathDev = '../../' + init.paths.dev,
+    pathStage = '../../' + init.paths.staging;
 
 gulp.task('js', function() {
 	return gulp.src([

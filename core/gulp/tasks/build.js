@@ -1,4 +1,4 @@
-const config = require('../../../options/config');
+const init = require('../../../core/init');
 
 const gulp           = require('gulp'),
 	del            = require('del'),
@@ -14,8 +14,8 @@ const gulp           = require('gulp'),
 	htmlmin        = require('gulp-htmlmin'),
 	gulpRemoveHtml = require('gulp-remove-html');
 
-let pathStage = '../../' + config.paths.staging,
-	pathProd = '../../' + config.paths.production;
+let pathStage = '../../' + init.paths.staging,
+	pathProd = '../../' + init.paths.production;
 
 gulp.task('build', ['removedist', 'clearcache', 'imagemin'], function() {
 	

@@ -1,16 +1,16 @@
-const config = require('../../options/config');
+const init = require('../../core/init');
 
 const gulp = require('gulp'),
 	del = require("del"),
 	browserSync = require('browser-sync'),
 	requireDir = require('require-dir');
 
-let pathDev = `../../${config.paths.dev}`,
-	pathStage = `../../${config.paths.staging}`;
+let pathDev = `../../${init.paths.dev}`,
+	pathStage = `../../${init.paths.staging}`;
 
-let styles = config.langs.styles,
-	scripts = config.langs.scripts,
-	templates = config.langs.templates;
+let styles = init.langs.styles,
+	scripts = init.langs.scripts,
+	templates = init.langs.templates;
 
 requireDir('tasks', {
 	recurse: true
