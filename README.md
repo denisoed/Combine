@@ -10,22 +10,22 @@ There is a choice of technology on which you are accustomed to develop sites:
 | Scripts   | js/jquery . coffeescript |
 | Grids     | smart-grid . bootstrap4 |
 
-### Installing dependencies
+### 1. Installing dependencies
+
+```sh
+$ npm install
+```
+### 2. Initialization start folder
 
 ```sh
 $ npm run combine-init
 ```
-### Initialization start folder
-
-```sh
-$ npm run combine-init
-```
-### Running the framework
+### 3. Running the framework
 
 ```sh
 $ npm run combine
 ```
-### Build project for production
+### 4. Build project for production
 ```sh
 $ npm run combine-prod
 ```
