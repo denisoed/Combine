@@ -4,12 +4,10 @@
   "description": "The starting template for site layout, using the sass and pug preprocessor. Multy page site!",
   "main": "index.js",
   "scripts": {
-    "combine-init": "node ./core/index.js",
-    "combine-libs": "npm i --customPath=addons",
+    "combine-init": "node ./core/index.js && node ./core/generator/generate.js",
     "combine": "gulp --gulpfile core/gulp/gulpfile.js",
     "combine-prod": "gulp build --gulpfile core/gulp/gulpfile.js",
-    "combine-grid": "node ./core/generator/grid.js",
-    "combine-generate": "node ./core/generator/generate.js"
+    "combine-libs": "npm i --customPath=addons"
   },
   "repository": "https://github.com/denisoed/start_template.git",
   "author": "Denisoed",

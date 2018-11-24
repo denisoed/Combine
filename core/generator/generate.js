@@ -5,21 +5,23 @@ const ncp = require('ncp').ncp;
 const rootPath = path.join(__dirname, '../../');
 const srcPath = path.dirname(require.main.filename);
 
+const config = require('../init.json');
+
 ncp.limit = 16;
 
 class GenerateStartProject {
 
     constructor() {
         this.folders = {
-            rootFolder: 'app',
+            rootFolder: config.paths.root,
             mainFolders: ['dev', 'staging']
         };
         this.langs = {
-            templates: process.argv.slice(2)[0] || 'html',
-            styles: process.argv.slice(2)[1] || 'css',
-            scripts: process.argv.slice(2)[2] || 'js',
+            templates: config.langs.templates,
+            styles: config.langs.styles,
+            scripts: config.langs.scripts,
         };
-        this.grids = process.argv.slice(2)[3] || 'bootstrap4';
+        this.grids = config.grids;
     }
 
     createMainFolder() {
@@ -38,33 +40,40 @@ class GenerateStartProject {
     copyInitialFiles() {
         let langKeys = Object.keys(this.langs);
         for (let i = 0; i < langKeys.length; i++) {
-            ncp(`${srcPath}/${langKeys[i]}/${this.langs[langKeys[i]]}`, rootPath + '/app/dev/' + this.langs[langKeys[i]], (err) => {
+            ncp(srcPath + '/' + langKeys[i] + '/' + this.langs[langKeys[i]],
+                rootPath + this.folders.rootFolder + '/dev/' + this.langs[langKeys[i]],
+                (err) => {
+                    if (err) {
+                        return console.error(err);
+                    }
+                    console.log('📥 ' + ' - Coping ' + this.langs[langKeys[i]] + ' files complete!');
+                }
+            ); 
+        }
+
+        ncp(srcPath + '/staging',
+            rootPath + this.folders.rootFolder + '/staging',
+            (err) => {
                 if (err) {
                     return console.error(err);
                 }
-                console.log('📥 ' + ' - Coping ' + this.langs[langKeys[i]] + ' files complete!');
-            }); 
-        }
-
-        ncp(`${srcPath}/staging`, rootPath + '/app/staging', function (err) {
-            if (err) {
-                return console.error(err);
+                console.log('📥 ' + ' - Coping staging files complete!');
             }
-            console.log('📥 ' + ' - Coping staging files complete!');
-        });
+        );
         
     }
     
     setGridSystem() {
         if (this.grids != 'Nothing') {
-            ncp(`${srcPath}/grids/${this.grids}/_grid.${this.langs.styles}`,
-                `${rootPath}/app/dev/${this.langs.styles}/_grid.${this.langs.styles}`,
-                function (err) {
-                if (err) {
-                    return console.error(err);
+            ncp(srcPath + '/grids/' + this.grids + '/_grid.'+ this.langs.styles,
+                rootPath + '/' + this.folders.rootFolder + '/dev/' + this.langs.styles + '/_grid.' + this.langs.styles,
+                (err) => {
+                    if (err) {
+                        return console.error(err);
+                    }
+                    console.log('📥 ' + ' - Coping grid file complete!');
                 }
-                console.log('📥 ' + ' - Coping grid file complete!');
-            });   
+            );   
         }
     }
 
