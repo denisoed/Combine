@@ -5,10 +5,10 @@ There is a choice of technology on which you are accustomed to develop sites:
 
 | Type      | Technology |
 | --------- | ---------- |
-| Structure | ️html . pug . hogan |
+| Structure | ️html . pug . twig |
 | Styles    | sass . scss . less |
 | Scripts   | js/jquery . coffeescript |
-|           |                        |
+| Grids     | smart-grid . bootstrap4 |
 
 ### Installing dependencies
 

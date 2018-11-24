@@ -9,7 +9,7 @@
             "type": "list",
             "name": "TemplateType",
             "message": "Select template",
-            "choices": ["html", "pug"]
+            "choices": ["html", "pug", "twig"]
         },
         {
             "type": "list",

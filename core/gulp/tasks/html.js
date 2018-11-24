@@ -1,10 +1,7 @@
 const init  = require('../../../core/init');
 const gulp = require('gulp');
 const pug = require('gulp-pug');
-const handlebars = require('gulp-handlebars');
-const wrap = require('gulp-wrap');
-const declare = require('gulp-declare');
-const concat = require('gulp-concat');
+const twig = require('gulp-twig');
 
 let pathDev = '../../' + init.paths.dev,
     pathStage = '../../' + init.paths.staging;
@@ -23,14 +20,8 @@ gulp.task('html', function () {
     .pipe(gulp.dest(pathStage));
 });
 
-gulp.task('hbs', function () {
-  gulp.src(pathDev + '/hbs/**/*.hbs')
-    .pipe(handlebars())
-    .pipe(wrap('Handlebars.template(<%= contents %>)'))
-    .pipe(declare({
-      namespace: 'MyApp.templates',
-      noRedeclare: true, // Avoid duplicate declarations
-    }))
-    .pipe(concat('hbs.js'))
+gulp.task('twig', function () {
+  return gulp.src(pathDev + '/twig/*.twig')
+    .pipe(twig())
     .pipe(gulp.dest(pathStage));
 });
