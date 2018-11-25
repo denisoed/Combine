@@ -5,8 +5,8 @@ const gulp = require('gulp'),
 	browserSync = require('browser-sync'),
 	requireDir = require('require-dir');
 
-let pathDev = `../../${init.paths.dev}`,
-	pathStage = `../../${init.paths.staging}`;
+let pathDev = '../../' + init.paths.root + '/dev',
+	pathStage = '../../' + init.paths.root + '/staging';
 
 let styles = init.langs.styles,
 	scripts = init.langs.scripts,
@@ -37,7 +37,7 @@ gulp.task('default-folder', ['clean'], function () {
 		.pipe(gulp.dest(pathStage + '/shared/default'));
 });
 
-gulp.task('watch', [styles, templates, scripts, `critical-styles_${styles}`, 'default-folder', 'browser-sync'], function () {
+gulp.task('watch', [styles, templates, scripts, `critical-styles_${styles}`, 'plugins', 'browser-sync'], function () {
 	gulp.watch(pathDev + '/' + styles + '/page-styles/*.' + styles, [`page-styles_${styles}`]);
 	gulp.watch(pathDev + '/' + styles + '/critical/*.' + styles, [`critical-styles_${styles}`]);
 	gulp.watch(pathDev + '/' + styles + '/*.' + styles, [styles]);

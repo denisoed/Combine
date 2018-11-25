@@ -14,8 +14,8 @@ const gulp           = require('gulp'),
 	htmlmin        = require('gulp-htmlmin'),
 	gulpRemoveHtml = require('gulp-remove-html');
 
-let pathStage = '../../' + init.paths.staging,
-	pathProd = '../../' + init.paths.production;
+let pathDev = '../../' + init.paths.root + '/staging',
+	pathStage = '../../' + init.paths.root + '/prod';
 
 gulp.task('build', ['removedist', 'clearcache', 'imagemin'], function() {
 	
