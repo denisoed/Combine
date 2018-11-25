@@ -6,8 +6,8 @@ const gulp         = require('gulp'),
     coffee         = require('gulp-coffee'),
     babel          = require('gulp-babel');
 
-let pathDev = '../../' + init.paths.dev,
-    pathStage = '../../' + init.paths.staging;
+let pathDev = '../../' + init.paths.root + '/dev',
+    pathStage = '../../' + init.paths.root + '/staging';
 
 gulp.task('js', function() {
 	return gulp.src([
@@ -38,4 +38,13 @@ gulp.task('coffee', function () {
     .pipe(concat('script.min.js'))
     .pipe(uglify())
     .pipe(gulp.dest(pathStage + '/js'));
+});
+
+gulp.task('plugins', function () {
+    return gulp.src([
+            "../../core/plugins/packages/ruler/index.js"
+        ])
+        .pipe(concat('plugins.min.js'))
+        .pipe(uglify())
+        .pipe(gulp.dest(pathStage + '/libs'))
 });

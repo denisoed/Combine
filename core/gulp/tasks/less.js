@@ -7,8 +7,8 @@ const gulp           = require('gulp'),
 	notify         = require('gulp-notify'),
 	autoprefixer   = require('gulp-autoprefixer');
 		
-let pathDev = '../../' + init.paths.dev,
-	pathStage = '../../' + init.paths.staging;
+let pathDev = '../../' + init.paths.root + '/dev',
+	pathStage = '../../' + init.paths.root + '/staging';
 
 gulp.task('less', ['page-styles_less'], function() {
 	return gulp.src([pathDev + '/less/*.less', '!' + pathDev + '/less/_*.less'])

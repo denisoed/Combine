@@ -1,8 +1,6 @@
 {
     "paths": {
-        "dev": "app/dev",
-        "staging": "app/staging",
-        "production": "app/prod"
+        "root": "app"
     },
     "questions": [
         {

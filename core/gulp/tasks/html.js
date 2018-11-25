@@ -3,8 +3,8 @@ const gulp = require('gulp');
 const pug = require('gulp-pug');
 const twig = require('gulp-twig');
 
-let pathDev = '../../' + init.paths.dev,
-    pathStage = '../../' + init.paths.staging;
+let pathDev = '../../' + init.paths.root + '/dev',
+  pathStage = '../../' + init.paths.root + '/staging';
 
 gulp.task('pug', function() {
   return gulp.src(pathDev + '/pug/*.pug')

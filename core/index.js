@@ -1,8 +1,8 @@
-const fs = require("fs");
-const inquirer = require("inquirer");
-const chalk = require("chalk");
-const figlet = require("figlet");
-const shell = require("shelljs");
+const fs = require('fs');
+const inquirer = require('inquirer');
+const chalk = require('chalk');
+const figlet = require('figlet');
+const shell = require('shelljs');
 
 const config = require('./config.json');
 
@@ -14,10 +14,10 @@ class Main {
   init() {
     console.log(
       chalk.green(
-        figlet.textSync("Combine CLI", {
-          font: "Letters",
-          horizontalLayout: "default",
-          verticalLayout: "default"
+        figlet.textSync('Combine CLI', {
+          font: 'Letters',
+          horizontalLayout: 'default',
+          verticalLayout: 'default'
         })
       )
     );
@@ -27,7 +27,7 @@ class Main {
     return inquirer.prompt(this.config.questions);
   };
 
-  createInitFile(data) {
+  createInitStructure(data) {
     const init = {
       paths: this.config.paths,
       langs: {
@@ -38,18 +38,14 @@ class Main {
       grids: data.GridType
     };
 
-    fs.writeFile("./core/init.json", JSON.stringify(init, null, 4), (err) => {
+    fs.writeFile('./core/init.json', JSON.stringify(init, null, 4), (err) => {
       if (err) {
         console.error(err);
         return;
       };
-      console.log("Init file has been created");
+      console.log('Init file has been created');
     });
   };
-
-  projectSetup(languages) {
-    shell.exec(`npm run combine-generate ${languages.TemplateType} ${languages.StylesType} ${languages.ScriptsType} ${languages.GridType}`);
-  }
 
   success() {
     console.log(
@@ -69,14 +65,8 @@ const run = async () => {
   // ask questions
   const answers = await main.askQuestions();
 
-  // create the config file
-  main.createInitFile(answers);
-
-  // Project setup
-  main.projectSetup(answers);
-
-  // show success message
-  main.success();
+  // create structure files
+  main.createInitStructure(answers);
 };
 
 run();
