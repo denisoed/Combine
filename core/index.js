@@ -65,11 +65,8 @@ const run = async () => {
   // ask questions
   const answers = await main.askQuestions();
 
-  // create the config file
+  // create structure files
   main.createInitStructure(answers);
-
-  // show success message
-  main.success();
 };
 
 run();
