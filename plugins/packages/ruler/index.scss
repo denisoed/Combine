@@ -1,0 +1,35 @@
+.point1 {
+    #ruler-width {
+        // Need before & after
+        position: fixed;
+        left: 0;
+        width: 100%;
+        outline: 1px dashed green;
+        z-index: 9999;
+    }
+
+    #ruler-height {
+        // Need before & after
+        position: fixed;
+        top: 0;
+        height: 100%;
+        outline: 1px dashed green;
+        z-index: 9999;
+    }
+}
+
+.point2 {
+    outline: 1px dashed red;
+
+    .ruler-line-height {
+        position: fixed;
+        outline: .1px dashed rgba(0, 0, 255, 0.534);
+        z-index: 9999;
+    }
+
+    .ruler-line-width {
+        position: fixed;
+        outline: .1px dashed rgba(0, 0, 255, 0.534);
+        z-index: 9999;
+    }
+}
