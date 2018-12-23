@@ -37,7 +37,7 @@ gulp.task('default-folder', ['clean'], function () {
 		.pipe(gulp.dest(pathStage + '/shared/default'));
 });
 
-gulp.task('watch', [styles, templates, scripts, `critical-styles_${styles}`, 'plugins', 'browser-sync'], function () {
+gulp.task('watch', [styles, 'template', scripts, `critical-styles_${styles}`, 'plugins', 'browser-sync'], function () {
 	gulp.watch(pathDev + '/' + styles + '/page-styles/*.' + styles, [`page-styles_${styles}`]);
 	gulp.watch(pathDev + '/' + styles + '/critical/*.' + styles, [`critical-styles_${styles}`]);
 	gulp.watch(pathDev + '/' + styles + '/*.' + styles, [styles]);

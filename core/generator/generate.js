@@ -81,7 +81,7 @@ class GenerateStartProject {
     addMultilang() {
         if (this.multilang === 'Yes') {
             ncp(srcPath + '/multilang/',
-                rootPath + '/' + this.folders.rootFolder + '/staging',
+                rootPath + '/' + this.folders.rootFolder + '/dev',
                 (err) => {
                     if (err) {
                         return console.error(err);

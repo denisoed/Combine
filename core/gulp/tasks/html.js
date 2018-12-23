@@ -2,6 +2,7 @@ const init  = require('../../../core/init');
 const gulp = require('gulp');
 const pug = require('gulp-pug');
 const i18n = require('gulp-html-i18n');
+const replace = require('gulp-replace');
 const twig = require('gulp-twig');
 
 const pathDev = '../../' + init.paths.root + '/dev';
@@ -31,12 +32,27 @@ gulp.task('twig', function () {
 gulp.task('localize', function () {
   return gulp.src(pathStage + '/*.html')
     .pipe(i18n({
-      langDir: pathStage + '/lang',
-      trace: true
+      langDir: pathDev + '/lang',
+      trace: false,
+      createLangDirs: true
     }))
-    .pipe(gulp.dest(pathStage + '/pages'));
+    .pipe(gulp.dest(pathStage));
+});
+
+gulp.task('multilang', ['localize'], () => {
+  return gulp.src(pathStage + '/*.html')
+    .pipe(replace(/<(?:.|\n)*>/g, 
+`<html>
+  <body>
+    <script>
+      let userLang = navigator.language || navigator.userLanguage;
+      window.location.href = userLang.slice(0, 2) + window.location.pathname;
+    </script>
+  </body>
+</html>`))
+    .pipe(gulp.dest(pathStage));
 });
 
 gulp.task('template', [template], () => {
-  if (init.multilang === 'Yes') gulp.start('localize');
+  if (init.multilang === 'Yes') gulp.start('multilang');
 });
