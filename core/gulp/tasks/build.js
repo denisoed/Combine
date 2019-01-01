@@ -29,9 +29,9 @@ gulp.task('build', ['removeProd', 'clearcache', 'imagemin'], function () {
 		.pipe(gulpRemoveHtml())
 		.pipe(gulp.dest(pathProd + '/'));
 
-	let buildHtmlMin = gulp.src(pathProd + '/tmp/*.html')
-		.pipe(htmlmin({collapseWhitespace: true}))
-		.pipe(gulp.dest(pathProd + '/'));
+	// let buildHtmlMin = gulp.src(pathProd + '/tmp/*.html')
+	// 	.pipe(htmlmin({collapseWhitespace: true}))
+	// 	.pipe(gulp.dest(pathProd + '/'));
 		
 	let buildCssStyles = gulp.src([
 		pathStage + '/css/**/*.css'
@@ -41,21 +41,9 @@ gulp.task('build', ['removeProd', 'clearcache', 'imagemin'], function () {
 		pathStage + '/js/scripts.min.js'
 	]).pipe(gulp.dest(pathProd + '/js'));
 
-	let buildFiles = gulp.src([
-		pathStage + '/.htaccess'
-	]).pipe(gulp.dest(pathProd + ''));
-
 	let buildFonts = gulp.src([
 		pathStage + '/fonts/**/*'
 	]).pipe(gulp.dest(pathProd + '/fonts'));
-
-	let buildShared = gulp.src([
-		pathStage + '/shared/**/*'
-	]).pipe(gulp.dest(pathProd + '/shared'));
-
-	let buildDefault = gulp.src([
-		pathStage + '/shared/default/**/*'
-	]).pipe(gulp.dest(pathProd + '/shared/default'));
 
 });
 
