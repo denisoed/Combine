@@ -17,9 +17,9 @@ const gulp           = require('gulp'),
 const pathStage = '../../' + init.paths.root + '/staging';
 const pathProd = '../../' + init.paths.root + '/prod';
 
-gulp.task('build', ['removedist', 'clearcache', 'imagemin'], function () {
+gulp.task('build', ['removeProd', 'clearcache', 'imagemin'], function () {
 	
-	let buildHtml = gulp.src(pathStage + '/*.html')
+	let buildHtml = gulp.src(pathStage + '/**/*.html')
 		.pipe(useref())
 		.pipe(gulpif('*.css', minifyCss()))
 		.pipe(gulpif('*.js', uglify()))
@@ -70,6 +70,6 @@ gulp.task('imagemin', function() {
 		.pipe(gulp.dest(pathProd + '/img'));
 });
 
-gulp.task('removedist', function() { return del.sync(pathProd, {force: true}) });
+gulp.task('removeProd', function() { return del.sync(pathProd, {force: true}) });
 
 gulp.task('clearcache', function() { return cache.clearAll(); });
