@@ -9,6 +9,16 @@ const pathDev = '../../' + init.paths.root + '/dev';
 const pathStage = '../../' + init.paths.root + '/staging';
 const template = init.langs.templates;
 
+const multilangTemplate = [
+`<html>
+  <body>
+    <script>
+      let userLang = navigator.language || navigator.userLanguage;
+      window.location.href = userLang.slice(0, 2) + window.location.pathname;
+    </script>
+  </body>
+</html>` ];
+
 gulp.task('pug', function() {
   return gulp.src(pathDev + '/pug/*.pug')
     .pipe( pug({
@@ -41,15 +51,7 @@ gulp.task('localize', function () {
 
 gulp.task('multilang', ['localize'], () => {
   return gulp.src(pathStage + '/*.html')
-    .pipe(replace(/<(?:.|\n)*>/g, 
-`<html>
-  <body>
-    <script>
-      let userLang = navigator.language || navigator.userLanguage;
-      window.location.href = userLang.slice(0, 2) + window.location.pathname;
-    </script>
-  </body>
-</html>`))
+    .pipe(replace(/<(?:.|\n)*>/g, multilangTemplate[0]))
     .pipe(gulp.dest(pathStage));
 });
 
