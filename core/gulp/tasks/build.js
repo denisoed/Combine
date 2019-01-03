@@ -17,7 +17,22 @@ const gulp           = require('gulp'),
 const pathStage = '../../' + init.paths.root + '/staging';
 const pathProd = '../../' + init.paths.root + '/prod';
 
-gulp.task('build', ['removeProd', 'clearcache', 'imagemin'], function () {
+gulp.task('imagemin', () => {
+	return gulp.src(pathStage + '/img/**/*')
+		.pipe(cache(imagemin({
+			interlaced: true,
+			progressive: true,
+			svgoPlugins: [{removeViewBox: false}],
+			use: [pngquant()]
+		})))
+		.pipe(gulp.dest(pathProd + '/img'));
+});
+
+gulp.task('removeProd', () => { return del.sync(pathProd, {force: true}) });
+
+gulp.task('clearcache', () => { return cache.clearAll(); });
+
+gulp.task('build', gulp.parallel('removeProd', 'clearcache', 'imagemin', () => {
 	
 	let buildHtml = gulp.src(pathStage + '/**/*.html')
 		.pipe(useref())
@@ -44,20 +59,4 @@ gulp.task('build', ['removeProd', 'clearcache', 'imagemin'], function () {
 	let buildFonts = gulp.src([
 		pathStage + '/fonts/**/*'
 	]).pipe(gulp.dest(pathProd + '/fonts'));
-
-});
-
-gulp.task('imagemin', function() {
-	return gulp.src(pathStage + '/img/**/*')
-		.pipe(cache(imagemin({
-			interlaced: true,
-			progressive: true,
-			svgoPlugins: [{removeViewBox: false}],
-			use: [pngquant()]
-		})))
-		.pipe(gulp.dest(pathProd + '/img'));
-});
-
-gulp.task('removeProd', function() { return del.sync(pathProd, {force: true}) });
-
-gulp.task('clearcache', function() { return cache.clearAll(); });
+}));

@@ -21,7 +21,7 @@
     "chalk": "^2.4.1",
     "del": "^3.0.0",
     "figlet": "^1.2.0",
-    "gulp": "^3.9.1",
+    "gulp": "^4.0",
     "gulp-autoprefixer": "^4.0.0",
     "gulp-babel": "^7.0.0",
     "gulp-cache": "^0.4.6",
@@ -32,6 +32,7 @@
     "gulp-concat": "^2.6.1",
     "gulp-debug": "^3.0.0",
     "gulp-file-include": "^1.2.0",
+    "gulp-html-i18n": "^0.14.0",
     "gulp-htmlmin": "^4.0.0",
     "gulp-if": "^2.0.2",
     "gulp-imagemin": "^3.0.3",
@@ -53,7 +54,6 @@
     "shelljs": "^0.8.2"
   },
   "dependencies": {
-    "gulp-html-i18n": "^0.14.0",
     "jquery": "^3.3.1"
   }
 }

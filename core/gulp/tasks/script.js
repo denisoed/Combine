@@ -9,7 +9,7 @@ const gulp         = require('gulp'),
 let pathDev = '../../' + init.paths.root + '/dev',
     pathStage = '../../' + init.paths.root + '/staging';
 
-gulp.task('js', function() {
+gulp.task('js', () => {
 	return gulp.src([
 		pathDev + '/js/**/*.js',
         ])
@@ -23,7 +23,7 @@ gulp.task('js', function() {
 	.pipe(gulp.dest(pathStage + '/js'));
 });
 
-gulp.task('coffee', function () {
+gulp.task('coffee', () => {
     return gulp.src([
         pathDev + '/coffee/**/*.coffee',
     ])
@@ -40,7 +40,7 @@ gulp.task('coffee', function () {
     .pipe(gulp.dest(pathStage + '/js'));
 });
 
-gulp.task('plugins', function () {
+gulp.task('plugins', () => {
     return gulp.src([
             "../../core/plugins/packages/ruler/index.js"
         ])

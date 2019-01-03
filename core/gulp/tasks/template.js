@@ -19,7 +19,7 @@ const multilangTemplate = [
   </body>
 </html>` ];
 
-gulp.task('pug', function() {
+gulp.task('pug', () => {
   return gulp.src(pathDev + '/pug/*.pug')
     .pipe( pug({
         pretty: true,
@@ -28,18 +28,18 @@ gulp.task('pug', function() {
     .pipe(gulp.dest(pathStage));
   });
 
-gulp.task('html', function () {
+gulp.task('html', () => {
     return gulp.src(pathDev + '/html/**/*.html')
     .pipe(gulp.dest(pathStage));
 });
 
-gulp.task('twig', function () {
+gulp.task('twig', () => {
   return gulp.src(pathDev + '/twig/*.twig')
     .pipe(twig())
     .pipe(gulp.dest(pathStage));
 });
 
-gulp.task('localize', function () {
+gulp.task('localize', () => {
   return gulp.src(pathStage + '/*.html')
     .pipe(i18n({
       langDir: pathDev + '/lang',
@@ -49,12 +49,12 @@ gulp.task('localize', function () {
     .pipe(gulp.dest(pathStage));
 });
 
-gulp.task('multilang', ['localize'], () => {
+gulp.task('multilang', gulp.parallel('localize', () => {
   return gulp.src(pathStage + '/*.html')
     .pipe(replace(/<(?:.|\n)*>/g, multilangTemplate[0]))
     .pipe(gulp.dest(pathStage));
-});
+}));
 
-gulp.task('template', [template], () => {
+gulp.task('template', gulp.series(template, () => {
   if (init.multilang === 'Yes') gulp.start('multilang');
-});
+}));

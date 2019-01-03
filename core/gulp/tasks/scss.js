@@ -10,18 +10,7 @@ const gulp           = require('gulp'),
 let pathDev = '../../' + init.paths.root + '/dev',
 	pathStage = '../../' + init.paths.root + '/staging';
 
-gulp.task('scss', ['page-styles_scss'], function() {
-	return gulp.src(pathDev + '/scss/*.scss')
-		.pipe(sass({outputStyle: 'expand'}).on("error", notify.onError()))
-		.pipe(rename({suffix: '.min', prefix : ''}))
-		.pipe(autoprefixer(['last 15 versions']))
-		.pipe(cleanCSS()) // Comment out when debugging
-		.pipe(gulp.dest(pathStage + '/css'))
-		.pipe(browserSync.reload({stream: true}));
-});
-
-
-gulp.task('page-styles_scss', function () {
+gulp.task('page-styles_scss', () => {
 	return gulp.src(pathDev + '/scss/page-styles/*.scss')
 		.pipe(sass({outputStyle: 'expand'}).on("error", notify.onError()))
 		.pipe(rename({suffix: '.min', prefix : ''}))
@@ -31,7 +20,7 @@ gulp.task('page-styles_scss', function () {
 		.pipe(browserSync.reload({stream: true}));
 });
 
-gulp.task('critical-styles_scss', function() {
+gulp.task('critical-styles_scss', () => {
 	return gulp.src(pathDev + '/scss/critical/*.scss')
 		.pipe(sass({outputStyle: 'expand'}).on("error", notify.onError()))
 		.pipe(rename({suffix: '.min', prefix : ''}))
@@ -40,3 +29,13 @@ gulp.task('critical-styles_scss', function() {
 		.pipe(gulp.dest(pathStage + '/css/critical'))
 		.pipe(browserSync.reload({stream: true}));
 });
+
+gulp.task('scss', gulp.parallel('page-styles_scss', () => {
+	return gulp.src(pathDev + '/scss/*.scss')
+		.pipe(sass({outputStyle: 'expand'}).on("error", notify.onError()))
+		.pipe(rename({suffix: '.min', prefix : ''}))
+		.pipe(autoprefixer(['last 15 versions']))
+		.pipe(cleanCSS()) // Comment out when debugging
+		.pipe(gulp.dest(pathStage + '/css'))
+		.pipe(browserSync.reload({stream: true}));
+}));

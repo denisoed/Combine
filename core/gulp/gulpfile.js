@@ -16,7 +16,7 @@ requireDir('tasks', {
 	recurse: true
 });
 
-gulp.task('browser-sync', function () {
+gulp.task('browser-sync', (done) => {
 	browserSync({
 		server: {
 			baseDir: pathStage
@@ -24,27 +24,17 @@ gulp.task('browser-sync', function () {
 		notify: false
 		// tunnel: true
 	});
+	done();
 });
 
-gulp.task('clean', function () {
-	return del(pathStage + '/shared/default/**/*', {
-		force: true
-	});
-});
-
-gulp.task('default-folder', ['clean'], function () {
-	gulp.src(pathDev + '/default/**/*')
-		.pipe(gulp.dest(pathStage + '/shared/default'));
-});
-
-gulp.task('watch', [styles, 'template', scripts, `critical-styles_${styles}`, 'plugins', 'browser-sync'], function () {
-	gulp.watch(pathDev + '/' + styles + '/page-styles/*.' + styles, [`page-styles_${styles}`]);
-	gulp.watch(pathDev + '/' + styles + '/critical/*.' + styles, [`critical-styles_${styles}`]);
-	gulp.watch(pathDev + '/' + styles + '/*.' + styles, [styles]);
-	gulp.watch(pathDev + '/' + templates + '/*.' + templates, ['template']);
-	gulp.watch(pathDev + '/' + scripts + '/*.' + scripts, [scripts]);
+gulp.task('watch', gulp.parallel(styles, 'template', scripts, `critical-styles_${styles}`, 'browser-sync', (done) => {
+	// gulp.watch(pathDev + '/' + styles + '/page-styles/*.' + styles, gulp.series(`page-styles_${styles}`));
+	// gulp.watch(pathDev + '/' + styles + '/critical/*.' + styles, gulp.series(`critical-styles_${styles}`));
+	// gulp.watch(pathDev + '/' + styles + '/*.' + styles, gulp.series(styles));
+	gulp.watch(pathDev + '/' + templates + '/*.' + templates, gulp.series('template'));
+	// gulp.watch(pathDev + '/' + scripts + '/*.' + scripts, gulp.series(scripts));
 	gulp.watch(pathStage + '/*.html', browserSync.reload);
-	gulp.watch(pathDev + '/default/**/*', ['default-folder']);
-});
+	done();
+}));
 
-gulp.task('default', ['watch']);
+gulp.task('default', gulp.parallel('watch'));
