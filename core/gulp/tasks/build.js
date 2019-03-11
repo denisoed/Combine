@@ -14,12 +14,12 @@ const gulp           = require('gulp'),
 	htmlmin        = require('gulp-htmlmin'),
 	gulpRemoveHtml = require('gulp-remove-html');
 
-let pathDev = '../../' + init.paths.root + '/staging',
-	pathStage = '../../' + init.paths.root + '/prod';
+const pathStage = '../../' + init.paths.root + '/staging';
+const pathProd = '../../' + init.paths.root + '/prod';
 
-gulp.task('build', ['removedist', 'clearcache', 'imagemin'], function() {
+gulp.task('build', ['removeProd', 'clearcache', 'imagemin'], function () {
 	
-	let buildHtml = gulp.src(pathStage + '/*.html')
+	let buildHtml = gulp.src(pathStage + '/**/*.html')
 		.pipe(useref())
 		.pipe(gulpif('*.css', minifyCss()))
 		.pipe(gulpif('*.js', uglify()))
@@ -29,9 +29,9 @@ gulp.task('build', ['removedist', 'clearcache', 'imagemin'], function() {
 		.pipe(gulpRemoveHtml())
 		.pipe(gulp.dest(pathProd + '/'));
 
-	let buildHtmlMin = gulp.src(pathProd + '/tmp/*.html')
-		.pipe(htmlmin({collapseWhitespace: true}))
-		.pipe(gulp.dest(pathProd + '/'));
+	// let buildHtmlMin = gulp.src(pathProd + '/tmp/*.html')
+	// 	.pipe(htmlmin({collapseWhitespace: true}))
+	// 	.pipe(gulp.dest(pathProd + '/'));
 		
 	let buildCssStyles = gulp.src([
 		pathStage + '/css/**/*.css'
@@ -41,21 +41,9 @@ gulp.task('build', ['removedist', 'clearcache', 'imagemin'], function() {
 		pathStage + '/js/scripts.min.js'
 	]).pipe(gulp.dest(pathProd + '/js'));
 
-	let buildFiles = gulp.src([
-		pathStage + '/.htaccess'
-	]).pipe(gulp.dest(pathProd + ''));
-
 	let buildFonts = gulp.src([
 		pathStage + '/fonts/**/*'
 	]).pipe(gulp.dest(pathProd + '/fonts'));
-
-	let buildShared = gulp.src([
-		pathStage + '/shared/**/*'
-	]).pipe(gulp.dest(pathProd + '/shared'));
-
-	let buildDefault = gulp.src([
-		pathStage + '/shared/default/**/*'
-	]).pipe(gulp.dest(pathProd + '/shared/default'));
 
 });
 
@@ -70,6 +58,6 @@ gulp.task('imagemin', function() {
 		.pipe(gulp.dest(pathProd + '/img'));
 });
 
-gulp.task('removedist', function() { return del.sync(pathProd, {force: true}) });
+gulp.task('removeProd', function() { return del.sync(pathProd, {force: true}) });
 
 gulp.task('clearcache', function() { return cache.clearAll(); });

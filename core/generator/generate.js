@@ -22,6 +22,7 @@ class GenerateStartProject {
             scripts: config.langs.scripts,
         };
         this.grids = config.grids;
+        this.multilang = config.multilang;
     }
 
     createMainFolder() {
@@ -63,7 +64,7 @@ class GenerateStartProject {
         
     }
     
-    setGridSystem() {
+    addGridSystem() {
         if (this.grids != 'Nothing') {
             ncp(srcPath + '/grids/' + this.grids + '/_grid.'+ this.langs.styles,
                 rootPath + '/' + this.folders.rootFolder + '/dev/' + this.langs.styles + '/_grid.' + this.langs.styles,
@@ -77,6 +78,20 @@ class GenerateStartProject {
         }
     }
 
+    addMultilang() {
+        if (this.multilang === 'Yes') {
+            ncp(srcPath + '/multilang/',
+                rootPath + '/' + this.folders.rootFolder + '/dev',
+                (err) => {
+                    if (err) {
+                        return console.error(err);
+                    }
+                    console.log('📥 ' + ' - Coping multilang files complete!');
+                }
+            );   
+        }
+    }
+
     generate() {
         // Create main folder
         this.createMainFolder();
@@ -85,7 +100,10 @@ class GenerateStartProject {
         this.copyInitialFiles();
 
         // Paste selected grid system
-        this.setGridSystem();
+        this.addGridSystem();
+
+        // Paste Multilang
+        this.addMultilang();
     }
 }
 

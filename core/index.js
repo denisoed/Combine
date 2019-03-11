@@ -35,7 +35,8 @@ class Main {
         styles: data.StylesType,
         scripts: data.ScriptsType,
       },
-      grids: data.GridType
+      grids: data.GridType,
+      multilang: data.Multilang
     };
 
     fs.writeFile('./core/init.json', JSON.stringify(init, null, 4), (err) => {

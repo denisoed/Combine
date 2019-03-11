@@ -26,6 +26,12 @@
             "name": "GridType",
             "message": "Select grid system",
             "choices": ["Nothing", "bootstrap4", "smart-grid"]
+        },
+        {
+            "type": "list",
+            "name": "Multilang",
+            "message": "Will the site be multilingual?",
+            "choices": ["No", "Yes"]
         }
     ]
 }
